@@ -11,17 +11,16 @@ import java.util.List;
 
 public class UserDAO {
 
-	private static final String INSERT_USERS_SQL = "INSERT INTO users"
+	private static final String INSERT_USERS_SQL = "INSERT INTO user"
 			+ "(firstName, lastName, phoneNumber, email ,address, city, zipcode, country) " +
 			"VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 	private static final String INSERT_LOGIN_SQL = "INSERT INTO login"
-			+ "(username, password) VALUES (?, ?);";
+			+ "(id, username, password) VALUES (?, ?, ?);";
 	private static final String SELECT_USER_BY_ID = "SELECT firstName, lastName, phoneNumber, email, address, city" +
-			", zipCode, country FROM users WHERE id = ?;";
-	private static final String SELECT_ALL_USERS = "SELECT * FROM users;";
-	private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE id = ?;";
-	private static final String DELETE_LOGIN_SQL = "DELETE FROM login WHERE id = ?;";
-	private static final String UPDATE_USERS_SQL = "UPDATE users " +
+			", zipCode, country FROM user WHERE id = ?;";
+	private static final String SELECT_ALL_USERS = "SELECT * FROM user;";
+	private static final String DELETE_USERS_SQL = "DELETE FROM user WHERE id = ?;";
+	private static final String UPDATE_USERS_SQL = "UPDATE user " +
 			"SET firstName = ?, lastName = ?, phoneNumber = ?, email = ?, address = ?, city = ?" +
 			", zipCode = ?, country = ? WHERE id = ?";
 	private final List<String> dbLoginInfo = new ArrayList<>();
@@ -123,19 +122,11 @@ public class UserDAO {
 	}
 
 	public boolean deleteUser(int id) throws SQLException {
-		boolean rowDeleted = false;
+		boolean rowDeleted;
 		try (Connection connection = getConnection();
 		        PreparedStatement usersStatement = connection.prepareStatement(DELETE_USERS_SQL)){
 			usersStatement.setInt(1, id);
-			boolean usersDeleted = usersStatement.executeUpdate() > 0;
-
-			PreparedStatement loginStatement = connection.prepareStatement(DELETE_LOGIN_SQL);
-			loginStatement.setInt(1, id);
-			boolean loginDeleted = loginStatement.executeUpdate() > 0;
-
-			if (usersDeleted && loginDeleted){
-				rowDeleted = true;
-			}
+			rowDeleted = usersStatement.executeUpdate() > 0;
 		}
 		return rowDeleted;
 	}
