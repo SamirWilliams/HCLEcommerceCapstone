@@ -11,22 +11,25 @@ import java.util.List;
 
 public class UserDAO {
 
-	private static final String INSERT_USERS_SQL = "INSERT INTO user"
+	private String url = "jdbc:mysql://localhost:3306/ecommercecapstone?useSSL=false";
+	private String username = "root";
+	private String password = "Origin7521";
+
+	private static final String INSERT_USERS_SQL = "INSERT INTO users"
 			+ "(firstName, lastName, phoneNumber, email ,address, city, zipcode, country) " +
 			"VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 	private static final String INSERT_LOGIN_SQL = "INSERT INTO login"
-			+ "(id, username, password) VALUES (?, ?, ?);";
+			+ "(username, password) VALUES (?, ?);";
 	private static final String SELECT_USER_BY_ID = "SELECT firstName, lastName, phoneNumber, email, address, city" +
-			", zipCode, country FROM user WHERE id = ?;";
-	private static final String SELECT_ALL_USERS = "SELECT * FROM user;";
-	private static final String DELETE_USERS_SQL = "DELETE FROM user WHERE id = ?;";
-	private static final String UPDATE_USERS_SQL = "UPDATE user " +
+			", zipCode, country FROM users WHERE userID = ?;";
+	private static final String SELECT_ALL_USERS = "SELECT * FROM users;";
+	private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE userID = ?;";
+	private static final String UPDATE_USERS_SQL = "UPDATE users " +
 			"SET firstName = ?, lastName = ?, phoneNumber = ?, email = ?, address = ?, city = ?" +
-			", zipCode = ?, country = ? WHERE id = ?";
+			", zipCode = ?, country = ? WHERE userID = ?";
 	private final List<String> dbLoginInfo = new ArrayList<>();
 
 	public UserDAO(){
-		getLoginInfo();
 	}
 
 	private void getLoginInfo(){
@@ -34,10 +37,11 @@ public class UserDAO {
 		try {
 			Object obj = parser.parse(new FileReader("src/main/resources/DBLoginInfo.JSON"));
 			JSONObject jsonObject = (JSONObject) obj;
-			dbLoginInfo.add(0,(String) jsonObject.get("url"));
+			dbLoginInfo.add(0, (String) jsonObject.get("url"));
 			dbLoginInfo.add(1, (String) jsonObject.get("username"));
 			dbLoginInfo.add(2, (String) jsonObject.get("password"));
 		} catch (Exception e){
+			System.out.println("getLoginInfo Error");
 			e.printStackTrace();
 		}
 	}
@@ -46,8 +50,11 @@ public class UserDAO {
 		Connection connection = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection(dbLoginInfo.get(0), dbLoginInfo.get(1), dbLoginInfo.get(2));
+			connection = DriverManager.getConnection(url, username, password);
+			//getLoginInfo();
+			//connection = DriverManager.getConnection(dbLoginInfo.get(0), dbLoginInfo.get(1), dbLoginInfo.get(2));
 		} catch (Exception e) {
+			System.out.println("getConnection Error");
 			e.printStackTrace();
 		}
 		return connection;
@@ -104,7 +111,7 @@ public class UserDAO {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				int id = rs.getInt("id");
+				int id = rs.getInt("userID");
 				String firstName = rs.getString("firstName");
 				String lastName = rs.getString("lastName");
 				String phoneNumber = rs.getString("phoneNumber");
@@ -116,6 +123,7 @@ public class UserDAO {
 				users.add(new User(id, firstName, lastName, phoneNumber, email, address, city, zipCode, country));
 			}
 		} catch (SQLException e) {
+			System.out.println("selectAllUsers Error");
 			printSQLException(e);
 		}
 		return users;
