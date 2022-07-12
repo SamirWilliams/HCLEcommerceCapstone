@@ -1,6 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.usermanagement.model.User" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    User auth = (User) request.getSession().getAttribute("auth");
+    if (auth != null){
+        request.setAttribute("auth", auth);
+    }
+%>
+
 <html>
 <head>
     <title>Ecommerce Capstone</title>
@@ -59,7 +67,7 @@
             <c:forEach var="user" items="${listUser}">
 
                 <tr>
-                    <td><c:out value="${user.userID}" /></td>
+                    <td><c:out value="${user.userId}" /></td>
                     <td><c:out value="${user.firstName} ${user.lastName}" /></td>
                     <td><c:out value="${user.phoneNumber}"/></td>
                     <td><c:out value="${user.email}" /></td>
@@ -67,9 +75,9 @@
                     <td><c:out value="${user.city}"/></td>
                     <td><c:out value="${user.zipCode}"/></td>
                     <td><c:out value="${user.country}" /></td>
-                    <td><a href="edit?id=<c:out value='${user.userID}' />">Edit</a>
+                    <td><a href="edit?id=<c:out value='${user.userId}' />">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="delete?id=<c:out value='${user.userID}' />">Delete</a></td>
+                                href="delete?id=<c:out value='${user.userId}' />">Delete</a></td>
                 </tr>
             </c:forEach>
 

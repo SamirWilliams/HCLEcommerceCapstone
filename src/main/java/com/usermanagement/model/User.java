@@ -8,15 +8,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-
-	private int userID;
+	private int userId;
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
-	private String email;
 	private String address;
 	private String city;
 	private String zipCode;
 	private String country;
-
+	private String email;
 }

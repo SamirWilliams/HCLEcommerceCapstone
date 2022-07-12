@@ -1,5 +1,6 @@
 package com.usermanagement.web;
 
+import com.usermanagement.connection.DBCon;
 import com.usermanagement.dao.UserDAO;
 import com.usermanagement.model.User;
 
@@ -13,13 +14,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/")
+@WebServlet("/list")
 public class UserServlet extends HttpServlet {
 
 	private UserDAO userDAO;
 
 	public void init() {
-		userDAO = new UserDAO();
+		//userDAO = new UserDAO(DBCon.getConnection());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

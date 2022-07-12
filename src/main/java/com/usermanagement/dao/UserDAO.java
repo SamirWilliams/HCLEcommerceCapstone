@@ -1,77 +1,75 @@
 package com.usermanagement.dao;
 
 import com.usermanagement.model.User;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-import java.io.FileReader;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
 
-	private String url = "jdbc:mysql://localhost:3306/ecommercecapstone?useSSL=false";
-	private String username = "root";
-	private String password = "Origin7521";
+	private Connection connection;
 
 	private static final String INSERT_USERS_SQL = "INSERT INTO users"
-			+ "(firstName, lastName, phoneNumber, email ,address, city, zipcode, country) " +
+			+ "(firstName, lastName, phoneNumber, address, city, zipcode, country, email) " +
 			"VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-	private static final String INSERT_LOGIN_SQL = "INSERT INTO login"
-			+ "(username, password) VALUES (?, ?);";
-	private static final String SELECT_USER_BY_ID = "SELECT firstName, lastName, phoneNumber, email, address, city" +
-			", zipCode, country FROM users WHERE userID = ?;";
+	private static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE userId = ?;";
 	private static final String SELECT_ALL_USERS = "SELECT * FROM users;";
-	private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE userID = ?;";
+	private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE userId = ?;";
 	private static final String UPDATE_USERS_SQL = "UPDATE users " +
 			"SET firstName = ?, lastName = ?, phoneNumber = ?, email = ?, address = ?, city = ?" +
-			", zipCode = ?, country = ? WHERE userID = ?";
-	private final List<String> dbLoginInfo = new ArrayList<>();
+			", zipCode = ?, country = ? WHERE userId = ?;";
+	private static final String USER_LOGIN_SQL = "SELECT * FROM users WHERE email = ? and password = SHA2(?, 512);";
 
-	public UserDAO(){
+	public UserDAO(Connection connection) {
+		this.connection = connection;
 	}
 
-	private void getLoginInfo(){
-		JSONParser parser = new JSONParser();
+	public User userLogin(String email, String password) {
+		User user = null;
 		try {
-			Object obj = parser.parse(new FileReader("src/main/resources/DBLoginInfo.JSON"));
-			JSONObject jsonObject = (JSONObject) obj;
-			dbLoginInfo.add(0, (String) jsonObject.get("url"));
-			dbLoginInfo.add(1, (String) jsonObject.get("username"));
-			dbLoginInfo.add(2, (String) jsonObject.get("password"));
-		} catch (Exception e){
-			System.out.println("getLoginInfo Error");
-			e.printStackTrace();
+			PreparedStatement preparedStatement = this.connection.prepareStatement(USER_LOGIN_SQL);
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, password);
+			preparedStatement.executeQuery();
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				int id = resultSet.getInt("userId");
+				String firstName = resultSet.getString("firstName");
+				String lastName = resultSet.getString("lastName");
+				String phoneNumber = resultSet.getString("phoneNumber");
+				String address = resultSet.getString("address");
+				String city = resultSet.getString("city");
+				String zipCode = resultSet.getString("zipCode");
+				String country = resultSet.getString("country");
+				String retrievedEmail = resultSet.getString("email");
+				user = new User(id, firstName, lastName, phoneNumber, address, city, zipCode, country, retrievedEmail);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("userLogin Error");
+			printSQLException(e);
 		}
+		return user;
 	}
 
-	protected Connection getConnection() throws SQLException {
-		Connection connection = null;
+	public void insertUser(User user) {
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection(url, username, password);
-			//getLoginInfo();
-			//connection = DriverManager.getConnection(dbLoginInfo.get(0), dbLoginInfo.get(1), dbLoginInfo.get(2));
-		} catch (Exception e) {
-			System.out.println("getConnection Error");
-			e.printStackTrace();
-		}
-		return connection;
-	}
-
-	public void insertUser(User user){
-		try (Connection connection = getConnection();
-		        PreparedStatement usersStatement = connection.prepareStatement(INSERT_USERS_SQL)){
-			usersStatement.setString(1, user.getFirstName());
-			usersStatement.setString(2, user.getLastName());
-			usersStatement.setString(3, user.getPhoneNumber());
-			usersStatement.setString(4, user.getEmail());
-			usersStatement.setString(5, user.getAddress());
-			usersStatement.setString(6, user.getCity());
-			usersStatement.setString(7, user.getZipCode());
-			usersStatement.setString(8, user.getCountry());
-			usersStatement.executeUpdate();
+			PreparedStatement preparedStatement = this.connection.prepareStatement(INSERT_USERS_SQL);
+			preparedStatement.setString(1, user.getFirstName());
+			preparedStatement.setString(2, user.getLastName());
+			preparedStatement.setString(3, user.getPhoneNumber());
+			preparedStatement.setString(4, user.getAddress());
+			preparedStatement.setString(5, user.getCity());
+			preparedStatement.setString(6, user.getZipCode());
+			preparedStatement.setString(7, user.getCountry());
+			preparedStatement.setString(8, user.getEmail());
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			printSQLException(e);
 		}
@@ -79,23 +77,23 @@ public class UserDAO {
 
 	public User selectUser(int id) {
 		User user = null;
-		try (Connection connection = getConnection();
-		        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)){
+		try {
+			PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_USER_BY_ID);
 			preparedStatement.setInt(1, id);
 			System.out.println(preparedStatement);
 
-			ResultSet rs = preparedStatement.executeQuery();
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-			while (rs.next()) {
-				String firstName = rs.getString("firstName");
-				String lastName = rs.getString("lastName");
-				String phoneNumber = rs.getString("phoneNumber");
-				String email = rs.getString("email");
-				String address = rs.getString("address");
-				String city = rs.getString("city");
-				String zipCode = rs.getString("zipCode");
-				String country = rs.getString("country");
-				user = new User(id, firstName, lastName, phoneNumber, email, address, city, zipCode, country);
+			while (resultSet.next()) {
+				String firstName = resultSet.getString("firstName");
+				String lastName = resultSet.getString("lastName");
+				String phoneNumber = resultSet.getString("phoneNumber");
+				String address = resultSet.getString("address");
+				String city = resultSet.getString("city");
+				String zipCode = resultSet.getString("zipCode");
+				String country = resultSet.getString("country");
+				String email = resultSet.getString("email");
+				user = new User(id, firstName, lastName, phoneNumber, address, city, zipCode, country, email);
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -105,22 +103,22 @@ public class UserDAO {
 
 	public List<User> selectAllUsers() {
 		List<User> users = new ArrayList<>();
-		try (Connection connection = getConnection();
-		        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS)){
+		try {
+			PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_ALL_USERS);
 
-			ResultSet rs = preparedStatement.executeQuery();
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-			while (rs.next()) {
-				int id = rs.getInt("userID");
-				String firstName = rs.getString("firstName");
-				String lastName = rs.getString("lastName");
-				String phoneNumber = rs.getString("phoneNumber");
-				String email = rs.getString("email");
-				String address = rs.getString("address");
-				String city = rs.getString("city");
-				String zipCode = rs.getString("zipCode");
-				String country = rs.getString("country");
-				users.add(new User(id, firstName, lastName, phoneNumber, email, address, city, zipCode, country));
+			while (resultSet.next()) {
+				int id = resultSet.getInt("userId");
+				String firstName = resultSet.getString("firstName");
+				String lastName = resultSet.getString("lastName");
+				String phoneNumber = resultSet.getString("phoneNumber");
+				String address = resultSet.getString("address");
+				String city = resultSet.getString("city");
+				String zipCode = resultSet.getString("zipCode");
+				String country = resultSet.getString("country");
+				String email = resultSet.getString("email");
+				users.add(new User(id, firstName, lastName, phoneNumber, address, city, zipCode, country, email));
 			}
 		} catch (SQLException e) {
 			System.out.println("selectAllUsers Error");
@@ -130,31 +128,36 @@ public class UserDAO {
 	}
 
 	public boolean deleteUser(int id) throws SQLException {
-		boolean rowDeleted;
-		try (Connection connection = getConnection();
-		        PreparedStatement usersStatement = connection.prepareStatement(DELETE_USERS_SQL)){
-			usersStatement.setInt(1, id);
-			rowDeleted = usersStatement.executeUpdate() > 0;
+		boolean rowDeleted = false;
+		try {
+			PreparedStatement preparedStatement = this.connection.prepareStatement(DELETE_USERS_SQL);
+			preparedStatement.setInt(1, id);
+			rowDeleted = preparedStatement.executeUpdate() > 0;
+		} catch (SQLException e) {
+			System.out.println("deleteUser Error");
+			printSQLException(e);
 		}
 		return rowDeleted;
 	}
 
 	//TODO
 	public boolean updateUser(User user) throws SQLException {
-		boolean rowUpdated;
-		try (Connection connection = getConnection();
-		        PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL)) {
-			statement.setString(1, user.getFirstName());
-			statement.setString(2, user.getLastName());
-			statement.setString(3, user.getPhoneNumber());
-			statement.setString(4, user.getEmail());
-			statement.setString(5, user.getAddress());
-			statement.setString(6, user.getCity());
-			statement.setString(7, user.getZipCode());
-			statement.setString(8, user.getCountry());
-			statement.setInt(9, user.getUserID());
-
-			rowUpdated = statement.executeUpdate() > 0;
+		boolean rowUpdated = false;
+		try {
+			PreparedStatement preparedStatement = this.connection.prepareStatement(UPDATE_USERS_SQL);
+			preparedStatement.setString(1, user.getFirstName());
+			preparedStatement.setString(2, user.getLastName());
+			preparedStatement.setString(3, user.getPhoneNumber());
+			preparedStatement.setString(4, user.getEmail());
+			preparedStatement.setString(5, user.getAddress());
+			preparedStatement.setString(6, user.getCity());
+			preparedStatement.setString(7, user.getZipCode());
+			preparedStatement.setString(8, user.getCountry());
+			preparedStatement.setInt(9, user.getUserId());
+			rowUpdated = preparedStatement.executeUpdate() > 0;
+		} catch (SQLException e) {
+			System.out.println("deleteUser Error");
+			printSQLException(e);
 		}
 		return rowUpdated;
 	}
