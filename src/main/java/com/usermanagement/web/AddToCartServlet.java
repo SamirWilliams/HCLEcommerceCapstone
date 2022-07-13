@@ -22,32 +22,35 @@ public class AddToCartServlet extends HttpServlet {
 		try (PrintWriter out = response.getWriter()) {
 			List<Cart> cartList = new ArrayList<>();
 			int id = Integer.parseInt(request.getParameter("id"));
-			String category = request.getParameter("cat");
+			String category = (String) request.getSession().getAttribute("category");
+
 			Cart cart = new Cart();
 			cart.setProductId(id);
 			cart.setCategory(category);
 			cart.setQuantity(1);
+
 			List<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
+
 			if (cart_list == null) {
 				cartList.add(cart);
+				request.getSession().setAttribute("addedToCart", true);
 				request.getSession().setAttribute("cart-list", cartList);
-				response.sendRedirect("products.jsp?cat="+cart.getCategory());
+				response.sendRedirect("product-list.jsp");
 			} else {
 				cartList = cart_list;
+				boolean alreadyInCart = false;
 
-				boolean exist = false;
 				for (Cart c : cart_list) {
 					if (c.getProductId() == id) {
-						exist = true;
-						request.setAttribute("exist", true);
-						request.getRequestDispatcher("products.jsp").forward(request,response);
-						//out.println("<h3 style='color:crimson; text-align: center'>Item Already in Cart. <a href='cart.jsp'>Go to Shopping Cart</a></h3>");
+						alreadyInCart = true;
+						request.getSession().setAttribute("alreadyInCart", true);
+						response.sendRedirect("product-list.jsp");
 					}
 				}
-
-				if (!exist) {
+				if (!alreadyInCart) {
 					cartList.add(cart);
-					response.sendRedirect("products.jsp?cat="+cart.getCategory());
+					request.getSession().setAttribute("addedToCart", true);
+					response.sendRedirect("product-list.jsp");
 				}
 			}
 		}

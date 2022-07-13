@@ -1,7 +1,7 @@
 package com.usermanagement.web;
 
 import com.usermanagement.connection.DBCon;
-import com.usermanagement.dao.UserDAO;
+import com.usermanagement.dao.UserDao;
 import com.usermanagement.model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
 			String email = request.getParameter("login-email");
 			String password = request.getParameter("login-password");
 
-			UserDAO userDAO = new UserDAO(DBCon.getConnection());
+			UserDao userDAO = new UserDao(DBCon.getConnection());
 			User user = userDAO.userLogin(email, password);
 
 			if (user != null) {

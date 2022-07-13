@@ -9,29 +9,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+public class UserDao {
 
 	private Connection connection;
 
-	private static final String INSERT_USERS_SQL = "INSERT INTO users"
+	private static final String INSERT_USER = "INSERT INTO users"
 			+ "(firstName, lastName, phoneNumber, address, city, zipcode, country, email) " +
 			"VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 	private static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE userId = ?;";
 	private static final String SELECT_ALL_USERS = "SELECT * FROM users;";
-	private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE userId = ?;";
-	private static final String UPDATE_USERS_SQL = "UPDATE users " +
+	private static final String DELETE_USER = "DELETE FROM users WHERE userId = ?;";
+	private static final String UPDATE_USER = "UPDATE users " +
 			"SET firstName = ?, lastName = ?, phoneNumber = ?, email = ?, address = ?, city = ?" +
 			", zipCode = ?, country = ? WHERE userId = ?;";
-	private static final String USER_LOGIN_SQL = "SELECT * FROM users WHERE email = ? and password = SHA2(?, 512);";
+	private static final String USER_LOGIN = "SELECT * FROM users WHERE email = ? and password = SHA2(?, 512);";
 
-	public UserDAO(Connection connection) {
+	public UserDao(Connection connection) {
 		this.connection = connection;
 	}
 
 	public User userLogin(String email, String password) {
 		User user = null;
 		try {
-			PreparedStatement preparedStatement = this.connection.prepareStatement(USER_LOGIN_SQL);
+			PreparedStatement preparedStatement = this.connection.prepareStatement(USER_LOGIN);
 			preparedStatement.setString(1, email);
 			preparedStatement.setString(2, password);
 			preparedStatement.executeQuery();
@@ -48,7 +48,8 @@ public class UserDAO {
 				String zipCode = resultSet.getString("zipCode");
 				String country = resultSet.getString("country");
 				String retrievedEmail = resultSet.getString("email");
-				user = new User(id, firstName, lastName, phoneNumber, address, city, zipCode, country, retrievedEmail);
+				boolean isAdmin = resultSet.getInt("isAdmin") != 0;
+				user = new User(id, firstName, lastName, phoneNumber, address, city, zipCode, country, retrievedEmail, isAdmin);
 			}
 
 		} catch (SQLException e) {
@@ -60,7 +61,7 @@ public class UserDAO {
 
 	public void insertUser(User user) {
 		try {
-			PreparedStatement preparedStatement = this.connection.prepareStatement(INSERT_USERS_SQL);
+			PreparedStatement preparedStatement = this.connection.prepareStatement(INSERT_USER);
 			preparedStatement.setString(1, user.getFirstName());
 			preparedStatement.setString(2, user.getLastName());
 			preparedStatement.setString(3, user.getPhoneNumber());
@@ -93,7 +94,8 @@ public class UserDAO {
 				String zipCode = resultSet.getString("zipCode");
 				String country = resultSet.getString("country");
 				String email = resultSet.getString("email");
-				user = new User(id, firstName, lastName, phoneNumber, address, city, zipCode, country, email);
+				boolean isAdmin = resultSet.getInt("isAdmin") != 0;
+				user = new User(id, firstName, lastName, phoneNumber, address, city, zipCode, country, email, isAdmin);
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -118,7 +120,8 @@ public class UserDAO {
 				String zipCode = resultSet.getString("zipCode");
 				String country = resultSet.getString("country");
 				String email = resultSet.getString("email");
-				users.add(new User(id, firstName, lastName, phoneNumber, address, city, zipCode, country, email));
+				boolean isAdmin = resultSet.getInt("isAdmin") != 0;
+				users.add(new User(id, firstName, lastName, phoneNumber, address, city, zipCode, country, email, isAdmin));
 			}
 		} catch (SQLException e) {
 			System.out.println("selectAllUsers Error");
@@ -130,7 +133,7 @@ public class UserDAO {
 	public boolean deleteUser(int id) throws SQLException {
 		boolean rowDeleted = false;
 		try {
-			PreparedStatement preparedStatement = this.connection.prepareStatement(DELETE_USERS_SQL);
+			PreparedStatement preparedStatement = this.connection.prepareStatement(DELETE_USER);
 			preparedStatement.setInt(1, id);
 			rowDeleted = preparedStatement.executeUpdate() > 0;
 		} catch (SQLException e) {
@@ -144,7 +147,7 @@ public class UserDAO {
 	public boolean updateUser(User user) throws SQLException {
 		boolean rowUpdated = false;
 		try {
-			PreparedStatement preparedStatement = this.connection.prepareStatement(UPDATE_USERS_SQL);
+			PreparedStatement preparedStatement = this.connection.prepareStatement(UPDATE_USER);
 			preparedStatement.setString(1, user.getFirstName());
 			preparedStatement.setString(2, user.getLastName());
 			preparedStatement.setString(3, user.getPhoneNumber());

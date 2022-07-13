@@ -17,4 +17,5 @@ public class User {
 	private String zipCode;
 	private String country;
 	private String email;
+	private boolean isAdmin;
 }
