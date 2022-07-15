@@ -25,10 +25,10 @@
     <%@ include file="includes/header.jsp" %>
     <title><%= productChoice %>s</title>
 </head>
-<body>
+<body class="gradient-custom1">
 <%@ include file="includes/navbar.jsp" %>
 
-<div class="container">
+<div class="container nav-fix">
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
         <a href="index.jsp" class="col-md-1 btn btn-primary">Back</a>
         <h1 class="flex-grow-1 text-center me-5"><%= productChoice %>s</h1>
@@ -58,14 +58,12 @@
                 <div class="card-footer">
                     <div class="mx-1 d-flex justify-content-between">
                         <a href="order-now?quantity=1&id=<%= p.getProductId() %>&price=<%= p.getUnitPrice() %>" class="btn btn-primary">Buy Now</a>
-                        <a href="add-to-cart?id=<%= p.getProductId() %>&cat=<%= p.getCategory()%>"
+                        <a href="add-to-cart?id=<%= p.getProductId() %>&price=<%= p.getUnitPrice() %>"
                            class="btn btn-outline-primary">Add to Cart</a>
                     </div>
                 </div>
             </div>
         </div>
-
-
         <%
                     }
                 }

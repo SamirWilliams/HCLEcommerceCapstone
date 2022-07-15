@@ -8,10 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order extends Product{
-
 	private int orderId;
 	private int userId;
+	private String orderDate;
 	private double orderPrice;
 	private int quantity;
-
 }

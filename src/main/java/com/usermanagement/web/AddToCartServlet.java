@@ -19,14 +19,16 @@ public class AddToCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 
-		try (PrintWriter out = response.getWriter()) {
+		try {
 			List<Cart> cartList = new ArrayList<>();
 			int id = Integer.parseInt(request.getParameter("id"));
 			String category = (String) request.getSession().getAttribute("category");
+			double price = Double.parseDouble(request.getParameter("price"));
 
 			Cart cart = new Cart();
 			cart.setProductId(id);
 			cart.setCategory(category);
+			cart.setUnitPrice(price);
 			cart.setQuantity(1);
 
 			List<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
@@ -53,6 +55,9 @@ public class AddToCartServlet extends HttpServlet {
 					response.sendRedirect("product-list.jsp");
 				}
 			}
+		} catch (Exception e) {
+			System.out.println("AddToCartServlet Error");
+			e.printStackTrace();
 		}
 	}
 }

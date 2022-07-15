@@ -159,7 +159,7 @@ public class UserDao {
 			preparedStatement.setInt(9, user.getUserId());
 			rowUpdated = preparedStatement.executeUpdate() > 0;
 		} catch (SQLException e) {
-			System.out.println("deleteUser Error");
+			System.out.println("updateUser Error");
 			printSQLException(e);
 		}
 		return rowUpdated;

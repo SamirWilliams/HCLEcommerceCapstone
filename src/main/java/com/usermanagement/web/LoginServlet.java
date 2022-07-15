@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("text/html;charset=UTF-8");
-		try (PrintWriter out = response.getWriter()) {
+		try {
 			String email = request.getParameter("login-email");
 			String password = request.getParameter("login-password");
 
@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
 			}
 
 		} catch (Exception e) {
+			System.out.println("LoginServlet Error");
 			e.printStackTrace();
 		}
 	}

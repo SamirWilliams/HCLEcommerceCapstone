@@ -14,33 +14,35 @@
     <%@ include file="includes/header.jsp" %>
     <title>Login</title>
 </head>
-<body>
+<body class="gradient-custom1">
 <%@ include file="includes/navbar.jsp" %>
-<div class="container">
+<div class="container nav-fix">
     <div class="card w-50 mx-auto my-5">
-        <div>
-            <%
-                    String login_msg = (String) request.getAttribute("error");
-                    if (login_msg != null) {
-                        out.println("<font color=red size=4px>" + login_msg + "</font>");
-                    }
-                }
-            %>
-        </div>
+        <%
+            String login_msg = (String) request.getAttribute("error");
+            if (login_msg != null) {%>
+            <div class="card-header">
+            <%out.println("<font color=red size=4px>" + login_msg + "</font>");%>
+            </div>
+			<%}
+            }
+        %>
         <div class="card-header text-center">User Login</div>
         <div class="card-body">
-            <form action="user-login" method="post">
-                <div class="form-group">
-                    <label>Email Address</label>
+            <form class="row g-3" action="user-login" method="post">
+                <div class="col-12">
+                    <label class="form-label">Email Address</label>
                     <input type="email" class="form-control" name="login-email" placeholder="Enter Your Email" required>
                 </div>
-                <div class="form-group">
-                    <label>Password</label>
+                <div class="col-12">
+                    <label class="form-label">Password</label>
                     <input type="password" class="form-control" name="login-password" placeholder="********" required>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="mt-3 btn btn-primary btn-lg">Login</button>
                 </div>
+                <p class="text-center text-muted mt-4 mb-0">Don't have an account?
+                    <a href="register.jsp" class="fw-bold text-body"><u style="color: #fff">Sign up now</u></a></p>
             </form>
         </div>
     </div>
