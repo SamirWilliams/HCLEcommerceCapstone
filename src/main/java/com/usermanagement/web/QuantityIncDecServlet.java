@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+//Called from cart.jsp
 @WebServlet ("/quantity-inc-dec")
 public class QuantityIncDecServlet extends HttpServlet {
 
@@ -22,17 +23,25 @@ public class QuantityIncDecServlet extends HttpServlet {
 
 			List<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
 
+			//checks if action and productId exist
 			if (action != null && productId >= 1){
+				//if action equals "inc" will add 1 to the specific cart products quantity
 				if (action.equals("inc")){
 					for (Cart c : cart_list){
 						if (c.getProductId() == productId){
 							int quantity = c.getQuantity();
 							quantity++;
 							c.setQuantity(quantity);
-							response.sendRedirect("cart.jsp");
+							break;
+
 						}
 					}
+					response.sendRedirect("cart.jsp");
 				}
+				/*
+				if action equals "dec" will remove 1 to the specific cart products quantity
+				cannot go below 1 quantity
+				 */
 				if (action.equals("dec")){
 					for (Cart c : cart_list){
 						if (c.getProductId() == productId && c.getQuantity() > 1){

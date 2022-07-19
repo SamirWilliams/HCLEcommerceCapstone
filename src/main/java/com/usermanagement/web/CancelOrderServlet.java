@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//Called from orders.jsp
 @WebServlet("/cancel-order")
 public class CancelOrderServlet extends HttpServlet {
 
@@ -25,6 +26,7 @@ public class CancelOrderServlet extends HttpServlet {
 					System.out.println("Cancel Order Failed");
 				}
 			}
+			//Will always redirect user to orders.jsp regardless of success or failure
 			response.sendRedirect("orders.jsp");
 		} catch (Exception e){
 			System.out.println("CancelOrderServlet Error");

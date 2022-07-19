@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
+//Called from login.jsp
 @WebServlet("/user-login")
 public class LoginServlet extends HttpServlet {
 
@@ -28,12 +28,12 @@ public class LoginServlet extends HttpServlet {
 			UserDao userDAO = new UserDao(DBCon.getConnection());
 			User user = userDAO.userLogin(email, password);
 
-			if (user != null) {
+			if (user != null) { //if userLogin() was successful adds user to auth session attribute
 				request.getSession().setAttribute("auth", user);
 				response.sendRedirect("index.jsp");
-			} else {
-				request.setAttribute("error", "Invalid Username or Password");
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+			} else { //if userLogin() failed redirects user to login.jsp with error message
+				request.setAttribute("loginError", "Invalid Username or Password");
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
 				requestDispatcher.include(request, response);
 			}
 

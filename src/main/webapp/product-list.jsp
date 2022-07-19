@@ -28,7 +28,7 @@
 <body class="gradient-custom1">
 <%@ include file="includes/navbar.jsp" %>
 
-<div class="container nav-fix">
+<div class="container">
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
         <a href="index.jsp" class="col-md-1 btn btn-primary">Back</a>
         <h1 class="flex-grow-1 text-center me-5"><%= productChoice %>s</h1>
@@ -39,7 +39,7 @@
     <% request.getSession().setAttribute("alreadyInCart", false);
 		}
         if (addedToCart) { %>
-    <h3 style='text-align: center'>Item Added to Cart</h3>
+    <h3 style='color:black; text-align: center'>Item Added to Cart</h3>
     <% request.getSession().setAttribute("addedToCart", false);
     } %>
     <div class="card-group">

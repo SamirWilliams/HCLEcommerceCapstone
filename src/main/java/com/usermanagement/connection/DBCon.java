@@ -7,7 +7,7 @@ public class DBCon {
 
 	private static Connection connection = null;
 	private static String url = "jdbc:mysql://localhost:3306/ecommercecapstone?useSSL=false";
-	//TODO Change these
+	//Change these to log in to your database
 	private static String username = "root";
 	private static String password = "password";
 

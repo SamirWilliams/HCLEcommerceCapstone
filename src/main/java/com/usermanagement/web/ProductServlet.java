@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+//Called from index.jsp
 @WebServlet("/product")
 public class ProductServlet extends HttpServlet {
 
@@ -23,7 +24,7 @@ public class ProductServlet extends HttpServlet {
 
 		String category = request.getParameter("cat");
 
-		request.getSession().setAttribute("category", category);
+		request.getSession().setAttribute("category", category);//Sets the category of products to show
 		request.getSession().setAttribute("productList", productList);
 
 		response.sendRedirect("product-list.jsp");

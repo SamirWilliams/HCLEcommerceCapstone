@@ -16,15 +16,20 @@
 </head>
 <body class="gradient-custom1">
 <%@ include file="includes/navbar.jsp" %>
-<div class="container nav-fix">
+<div class="container">
     <div class="card w-50 mx-auto my-5">
         <%
-            String login_msg = (String) request.getAttribute("error");
+            String login_msg = (String) request.getAttribute("loginError");
+            String register_msg = (String) request.getAttribute("registerSuccess");
             if (login_msg != null) {%>
             <div class="card-header">
             <%out.println("<font color=red size=4px>" + login_msg + "</font>");%>
             </div>
-			<%}
+			<%} else if (register_msg != null) {%>
+                <div class="card-header">
+                    <%out.println("<font size=4px>" + register_msg + "</font>");%>
+                </div>
+                <%}
             }
         %>
         <div class="card-header text-center">User Login</div>

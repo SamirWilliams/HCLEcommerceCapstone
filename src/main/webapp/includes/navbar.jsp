@@ -1,4 +1,4 @@
-<nav style="background: #772593" class="navbar navbar-expand-lg navbar-dark fixed-top">
+<nav style="background: #772593" class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a style="font-size: 30px" class="navbar-brand fw-bold" href="index.jsp">Ecommerce Shopping <i style="font-size: 40px" class="fas fa-dolly"></i></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -15,10 +15,14 @@
                         <span style="background: #2e73b8" class="badge">${cart_list.size()}</span></a>
                 </li>
                 <% if (auth != null) {%>
-                <!-- TODO Add isAdmin check here-->
                 <li class="nav-item">
                     <a style="font-size: 20px" class="nav-link active" href="orders.jsp"><i class="fa-solid fa-scroll"></i> Orders</a>
                 </li>
+                <% if (auth.isAdmin()){ %>
+                <li class="nav-item">
+                    <a style="font-size: 20px" class="nav-link active" href="list-users"><i class="fa-solid fa-users"></i> Users</a>
+                </li>
+                <% } %>
                 <li class="nav-item">
                     <a style="font-size: 20px" class="nav-link active" href="user-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>
                         Logout</a>

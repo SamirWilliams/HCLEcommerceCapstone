@@ -24,7 +24,7 @@
 <body class="gradient-custom1">
 <%@ include file="includes/navbar.jsp" %>
 
-<div class="container table-responsive nav-fix">
+<div class="container table-responsive">
     <div class="card-header my-3 fw-bold">All Orders</div>
     <table style="table-layout: fixed;" class="table table-light table-striped align-middle table-bordered">
         <thead>
@@ -79,7 +79,7 @@
                 }%>
             <td style="text-align: right;">$<%= nf.format(sum) %>
             </td>
-            <td style="text-align: center"><a class="btn btn-danger" href="cancel-order?id=<%=o.getOrderId()%>">Cancel</a></td>
+            <td style="text-align: center"><a class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel?')" href="cancel-order?id=<%=o.getOrderId()%>">Cancel</a></td>
         </tr>
         <%
         } else if (oId != o.getOrderId()) {
@@ -123,7 +123,7 @@
                 }%>
             <td style="text-align: right;">$<%= nf.format(sum) %>
             </td>
-            <td style="text-align: center"><a class="btn btn-danger" href="cancel-order?id=<%= o.getOrderId() %>">Cancel</a></td>
+            <td style="text-align: center"><a class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel?')" href="cancel-order?id=<%= o.getOrderId() %>">Cancel</a></td>
         </tr>
         <%
                     }

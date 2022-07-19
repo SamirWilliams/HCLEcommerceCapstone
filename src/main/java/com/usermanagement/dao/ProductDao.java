@@ -12,6 +12,7 @@ import java.util.List;
 public class ProductDao {
 
 	private Connection connection;
+
 	private static final String SELECT_ALL_PRODUCTS = "SElECT * FROM products;";
 	private static final String SELECT_PRODUCT_BY_ID = "SElECT * FROM products WHERE productID = ?;";
 	private static final String SELECT_PRODUCT_BY_PRICE = "SELECT unitPrice FROM products WHERE productID = ?;";
@@ -20,9 +21,12 @@ public class ProductDao {
 		this.connection = connection;
 	}
 
+	/*
+	Used in ProductServlet
+	Returns a list of Products from the database
+	 */
 	public List<Product> getAllProducts() {
 		List<Product> productList = new ArrayList<>();
-
 		try {
 			PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_ALL_PRODUCTS);
 
@@ -43,9 +47,13 @@ public class ProductDao {
 		return productList;
 	}
 
+	/*
+	Used directly in cart.jsp
+	Returns a list of Cart rows with populated data from the database
+	Uses the productId from cart items from the List<Cart> cartList object
+	 */
 	public List<Cart> getCartProducts(List<Cart> cartList) {
 		List<Cart> products = new ArrayList<>();
-
 		try {
 			if (cartList.size() > 0) {
 				for (Cart item : cartList) {
@@ -71,9 +79,12 @@ public class ProductDao {
 		return products;
 	}
 
+	/*
+	Used directly in cart.jsp
+	Returns the sum of all items within the given ArrayList<Cart>
+	 */
 	public double getTotalCartPrice(ArrayList<Cart> cartList) {
 		double sum = 0;
-
 		try {
 			if (!cartList.isEmpty()) {
 				for (Cart item : cartList) {

@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+//Called from product-list.jsp and cart.jsp
 @WebServlet("/order-now")
 public class OrderNowServlet extends HttpServlet {
 
@@ -40,6 +41,11 @@ public class OrderNowServlet extends HttpServlet {
 				OrderDao orderDao = new OrderDao(DBCon.getConnection());
 				boolean result = orderDao.insertOrder(order);
 
+				/*
+				If insertOrder() was successful and cart_list is not null then it removes only the selected
+					product from the cart list
+				 */
+
 				if (result) {
 					if (cart_list != null){
 						for (Cart c : cart_list){
@@ -52,11 +58,10 @@ public class OrderNowServlet extends HttpServlet {
 					response.sendRedirect("orders.jsp");
 				} else {
 					System.out.println("Order Failed");
+					response.sendRedirect("orders.jsp");
 				}
-
 			} else {
-				//TODO Change to register.jsp after finishing the UI for that
-				response.sendRedirect("login.jsp");
+				response.sendRedirect("register.jsp");
 			}
 		} catch (Exception e){
 			System.out.println("OrderNowServlet Error");

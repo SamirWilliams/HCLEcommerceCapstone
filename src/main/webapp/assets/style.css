@@ -9,23 +9,19 @@
     background: linear-gradient(to left, rgba(104, 71, 180, 0.5), rgba(51, 102, 153, 0.5))
 }
 
-.nav-fix {
-    margin-top: 100px;
-}
-
 .table-light {
-    --bs-table-bg: #1d3a92;
-    --bs-table-striped-bg: #2449b7;
-    --bs-table-striped-color: white;
-    color: white;
+    --bs-table-bg: #5777d5;
+    --bs-table-striped-bg: #7992dd;
+    --bs-table-striped-color: black;
+    color: black;
     border-color: #111111;
 }
 
 .table-secondary {
-    --bs-table-bg: #315ad6;
-    --bs-table-striped-bg: #5678de;
-    --bs-table-striped-color: white;
-    color: white;
+    --bs-table-bg: #7791e0;
+    --bs-table-striped-bg: #9fb1e9;
+    --bs-table-striped-color: black;
+    color: black;
     border-color: #111111;
 }
 
@@ -49,7 +45,7 @@ table {
 
 .btn-primary{
     background-color: #772593;
-    border-color: #b82e95;
+    border-color: #9f2881;
 }
 
 .btn-primary:hover{
@@ -67,10 +63,15 @@ table {
     border-color: #b82e95;
 }
 
+.btn-danger {
+    background-color: #a32966;
+    border-color: #a32966;
+}
+
 .btn-incre, .btn-decre {
     box-shadow: none;
     font-size: 20px;
-    color: #2e73b8;
+    color: #8429a3;
 }
 
 .card {

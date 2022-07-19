@@ -14,6 +14,7 @@ import java.util.List;
 public class OrderDao {
 
 	private Connection connection;
+
 	//TODO Change to also include order price
 	private static final String INSERT_INTO_ORDERS = "INSERT INTO orders (userId) VALUES (?);";
 	private static final String SELECT_PREVIOUS_ORDER_ID = "SELECT orderId FROM orders ORDER BY orderId DESC LIMIT 0,1;";
@@ -27,6 +28,10 @@ public class OrderDao {
 		this.connection = connection;
 	}
 
+	/*
+	Used directly in orders.jsp
+	Returns a list of Orders
+	 */
 	public List<Order> listUserOrders (int id){
 		List<Order> orderList = new ArrayList<>();
 		try {
@@ -57,6 +62,11 @@ public class OrderDao {
 		return orderList;
 	}
 
+	/*
+	Used in CancelOrderServlet
+	Returns true if order was successfully deleted
+	Returns false otherwise
+	 */
 	public boolean cancelOrder(int orderId) {
 		boolean result = false;
 		try{
@@ -71,18 +81,25 @@ public class OrderDao {
 		return result;
 	}
 
-	public Boolean insertOrder(List<Cart> cart_list, User auth) {
+	/*
+	Used in CheckOutServlet
+	Returns true data was successfully added to both the orders and order_details table
+	Returns false otherwise
+	 */
+	public boolean insertOrder(List<Cart> cart_list, User auth) {
 		boolean finalResult = false;
-		boolean ordersResult = false;
+		boolean ordersResult;
 		boolean orderDetailsResult = false;
 		int orderId = 0;
 
 		try {
+			//Inserts userId into orders table to generate new orderId
 			PreparedStatement insertOrder = this.connection.prepareStatement(INSERT_INTO_ORDERS);
 			insertOrder.setInt(1, auth.getUserId());
 
 			ordersResult = insertOrder.executeUpdate() > 0;
 
+			//Retrieves the most recently generated orderId
 			PreparedStatement recentOrderId = this.connection.prepareStatement(SELECT_PREVIOUS_ORDER_ID);
 
 			ResultSet resultSet = recentOrderId.executeQuery();
@@ -94,6 +111,7 @@ public class OrderDao {
 			if (orderId <= 0) {
 				throw new SQLException("Failed to retrieve orderId from orders table");
 			} else {
+				//Adds products from cart into database
 				for (Cart c: cart_list){
 					Order order = new Order();
 					order.setProductId(c.getProductId());
@@ -119,18 +137,25 @@ public class OrderDao {
 		return finalResult;
 	}
 
+	/*
+	Used in OrderNowServlet
+	Returns true data was successfully added to both the orders and order_details table
+	Returns false otherwise
+	 */
 	public boolean insertOrder(Order order) {
 		boolean finalResult = false;
-		boolean ordersResult = false;
-		boolean orderDetailsResult = false;
+		boolean ordersResult;
+		boolean orderDetailsResult;
 		int orderId = 0;
 
 		try {
+			//Inserts userId into orders table to generate new orderId
 			PreparedStatement insertOrder = this.connection.prepareStatement(INSERT_INTO_ORDERS);
 			insertOrder.setInt(1, order.getUserId());
 
 			ordersResult = insertOrder.executeUpdate() > 0;
 
+			//Retrieves the most recently generated orderId
 			PreparedStatement recentOrderId = this.connection.prepareStatement(SELECT_PREVIOUS_ORDER_ID);
 
 			ResultSet resultSet = recentOrderId.executeQuery();
@@ -142,6 +167,7 @@ public class OrderDao {
 			if (orderId <= 0) {
 				throw new SQLException("Failed to retrieve orderId from orders table");
 			} else {
+				//Adds product from order into database
 				PreparedStatement insertOrderDetails = this.connection.prepareStatement(INSERT_INTO_ORDER_DETAILS);
 				insertOrderDetails.setInt(1, orderId);
 				insertOrderDetails.setInt(2, order.getProductId());

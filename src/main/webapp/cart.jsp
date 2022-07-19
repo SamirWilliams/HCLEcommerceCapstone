@@ -10,7 +10,6 @@
     if (cart_List != null) {
         ProductDao productDao = new ProductDao(DBCon.getConnection());
         cartProduct = productDao.getCartProducts(cart_List);
-        request.setAttribute("cart_list", cart_List);
 
         double total = productDao.getTotalCartPrice(cart_List);
         request.setAttribute("cart_total", total);
@@ -25,7 +24,7 @@
 <body class="gradient-custom1">
 <%@ include file="includes/navbar.jsp" %>
 
-<div class="container table-responsive nav-fix">
+<div class="container table-responsive">
     <form action="cart-check-out" method="post" class="d-flex">
         <div class="mt-3 mb-1 w-100 d-flex align-items-center">
             <h3 style="color: black" class="fw-bold">Total Price: <fmt:formatNumber value="${(cart_total > 0)?cart_total:0.00}" type="currency"/></h3>
@@ -33,18 +32,18 @@
         </div>
     </form>
 
-    <table style="table-layout: fixed;" class="table table-light table-striped align-middle">
+    <table style="table-layout: fixed;" class="table table-light table-striped align-middle table-bordered">
         <thead>
         <tr>
             <th style="width: 25%" scope="col">Name</th>
             <th style="width: 10%" scope="col">Category</th>
             <th style="width: 10%; text-align: right" scope="col">Price</th>
             <th style="width: 40%" scope="col">Quantity</th>
-            <th style="width: 25%; text-align: center" scope="col">Remove Item</th>
+            <th style="width: 20%; text-align: center" scope="col">Remove Item</th>
         </tr>
         </thead>
         <tbody>
-        <% if (cart_List != null) {
+        <% if (cartProduct != null) {
             for (Cart c : cartProduct) { %>
         <tr>
             <td><%= c.getProductName() %></td>
@@ -70,7 +69,7 @@
                     <div class="ms-auto align-self-end"></div>
                 </form>
             </td>
-            <td style="text-align: center"><a class="btn btn-danger" href="remove-from-cart?id=<%=c.getProductId()%>">Remove</a></td>
+            <td style="text-align: center"><a class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this item?')" href="remove-from-cart?id=<%=c.getProductId()%>">Remove</a></td>
         </tr>
         <% }
         } %>

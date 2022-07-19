@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+//Called from cart.jsp
 @WebServlet("/remove-from-cart")
 public class RemoveFromCartServlet extends HttpServlet {
 
@@ -21,6 +22,7 @@ public class RemoveFromCartServlet extends HttpServlet {
 			String productId = request.getParameter("id");
 			if (productId != null){
 				List<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
+				//If cart_list is not null will go through the cart and remove product equal to given productId
 				if (cart_list != null){
 					for (Cart c : cart_list){
 						if (c.getProductId() == Integer.parseInt(productId)){
@@ -28,6 +30,7 @@ public class RemoveFromCartServlet extends HttpServlet {
 							break;
 						}
 					}
+					//Will always redirect to cart.jsp regardless of product removal
 					response.sendRedirect("cart.jsp");
 				}
 			} else {
