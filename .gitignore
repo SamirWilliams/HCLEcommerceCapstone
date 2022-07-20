@@ -1,6 +1,3 @@
 # User Generated
 # Ignored to keep login info secure
 src/main/resources/DBLoginInfo.JSON
-
-# Ignored binary output folder
-target

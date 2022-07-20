@@ -1,0 +1,87 @@
+.gradient-custom1 {
+    /* fallback for old browsers */
+    background: #6847b4;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to left, rgba(104, 71, 180, 0.5), rgba(51, 102, 153, 0.5));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to left, rgba(104, 71, 180, 0.5), rgba(51, 102, 153, 0.5))
+}
+
+.table-light {
+    --bs-table-bg: #5777d5;
+    --bs-table-striped-bg: #7992dd;
+    --bs-table-striped-color: black;
+    color: black;
+    border-color: #111111;
+}
+
+.table-secondary {
+    --bs-table-bg: #7791e0;
+    --bs-table-striped-bg: #9fb1e9;
+    --bs-table-striped-color: black;
+    color: black;
+    border-color: #111111;
+}
+
+.mask-custom {
+    backdrop-filter: blur(5px);
+    background-color: rgba(119, 37, 147, 0.45);
+}
+
+body {
+    color: white;
+    height: 100%;
+}
+
+table {
+    background-color: #502eb8;
+}
+
+.table tbody td {
+    vertical-align: middle;
+}
+
+.btn-primary{
+    background-color: #772593;
+    border-color: #9f2881;
+}
+
+.btn-primary:hover{
+    background-color: #b82e95;
+    border-color: #b82e95;
+}
+
+.btn-outline-primary{
+    border-color: #b82e95;
+    color: #b82e95;
+}
+
+.btn-outline-primary:hover {
+    background-color: #b82e95;
+    border-color: #b82e95;
+}
+
+.btn-danger {
+    background-color: #a32966;
+    border-color: #a32966;
+}
+
+.btn-incre, .btn-decre {
+    box-shadow: none;
+    font-size: 20px;
+    color: #8429a3;
+}
+
+.card {
+    background-color: #502eb8;
+}
+
+.card-header {
+    background: #333399;
+}
+
+.text-muted {
+    color: #b1beca !important;
+}
