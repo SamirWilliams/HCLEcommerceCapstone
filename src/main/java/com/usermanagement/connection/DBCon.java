@@ -6,10 +6,10 @@ import java.sql.DriverManager;
 public class DBCon {
 
 	private static Connection connection = null;
-	private static String url = "jdbc:mysql://localhost:3306/ecommercecapstone?useSSL=false";
+	private static String url = "jdbc:mysql://ecomdb.mysql.database.azure.com:3306/ecommercecapstone";
 	//Change these to log in to your database
-	private static String username = "root";
-	private static String password = "password";
+	private static String username = "swilliams";
+	private static String password = "Sherida22";
 
 	public static Connection getConnection() {
 		if (connection == null) {
