@@ -31,7 +31,7 @@ List<Product> products = prd.getAllProducts();
 				<img class = "card-img-top" src = "assets/product-image/<%= p.getProductImage() %>" width = "200" height="300" alt = "Card image cap">
 				<div class = "card-body w-100 h-100">
 					<h5 class = "card-title"><%= p.getProductName() %></h5>
-					<h6 class = "price">Price: $<%= p.getUnitPrice() %></h6>
+					<h6 class = "price">Price: $<%= nf.format(p.getUnitPrice()) %></h6>
 					<h6 class = "category">Category: <%= p.getCategory() %></h6>
 					<div class = "text-center">
 						<input class = "invisible" name = "prodID" value = "<%= p.getProductId()%>">

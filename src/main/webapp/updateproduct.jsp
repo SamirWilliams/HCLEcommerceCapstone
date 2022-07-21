@@ -30,10 +30,10 @@ List<Product> products = prd.getAllProducts();
 				<div class = "card w-100 h-100" style = "background: #772593; width: 18rem;">
 				<img class = "card-img-top" src = "assets/product-image/<%= p.getProductImage() %>" width = "200" height="300" alt = "Card image cap">
 				<div class = "card-body">
-					<h6 class = "image">Image (.jpg): <input type = "text" class = "form-control my-2" name = "prodimage" placeholder = "<%= p.getProductImage() %>"></h6>
-					<h6 class = "name">Name: <input type = "text" class = "form-control my-2" name = "prodname" placeholder = "<%= p.getProductName() %>" required></h6>
-					<h6 class = "price">Price: $<input type = "text" class = "form-control my-2" name = "prodprice" placeholder = "<%= p.getUnitPrice() %>" required></h6>
-					<h6 class = "category">Category: <input type = "text" class = "form-control my-2" name = "prodcategory" placeholder = "<%= p.getCategory() %>" required></h6>
+					<h6 class = "image">Image (.jpg): <input type = "text" class = "form-control my-2" name = "prodimage" value = "<%= p.getProductImage() %>"></h6>
+					<h6 class = "name">Name: <input type = "text" class = "form-control my-2" name = "prodname" value = "<%= p.getProductName() %>" required></h6>
+					<h6 class = "price">Price: $<input type = "text" class = "form-control my-2" name = "prodprice" value = "<%= nf.format(p.getUnitPrice()) %>" required></h6>
+					<h6 class = "category">Category: <input type = "text" class = "form-control my-2" name = "prodcategory" value = "<%= p.getCategory() %>" required></h6>
 					<div class = "text-center">
 						<input class = "invisible" name = "prodID" value = "<%= p.getProductId()%>">
 						<button class = "btn btn-primary" style = "background: #333399">Update</button>
