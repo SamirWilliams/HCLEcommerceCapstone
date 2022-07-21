@@ -53,6 +53,11 @@ table {
     border-color: #b82e95;
 }
 
+.btn:hover{
+    background-color: #b82e95;
+    border-color: #b82e95;
+}
+
 .btn-outline-primary{
     border-color: #b82e95;
     color: #b82e95;
