@@ -2,6 +2,10 @@
 .dropdown-menu> a:hover {
   background-color: #b82e95 !important;
 }
+.btn:hover{
+    background-color: #b82e95;
+    border-color: #b82e95;
+}
 </style>
 <nav style="background: #772593" class="navbar navbar-expand-lg navbar-dark">
     <div class="d-flex align-items-center justify-content-between" style="width: 100%">
