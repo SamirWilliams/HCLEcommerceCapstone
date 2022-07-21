@@ -13,9 +13,12 @@ public class ProductDao {
 
 	private Connection connection;
 
-	private static final String SELECT_ALL_PRODUCTS = "SElECT * FROM products;";
-	private static final String SELECT_PRODUCT_BY_ID = "SElECT * FROM products WHERE productID = ?;";
-	private static final String SELECT_PRODUCT_BY_PRICE = "SELECT unitPrice FROM products WHERE productID = ?;";
+	private static final String SELECT_ALL_PRODUCTS = "SELECT * FROM products;";
+	private static final String SELECT_PRODUCT_BY_ID = "SELECT * FROM products WHERE productId = ?;";
+	private static final String SELECT_PRODUCT_BY_PRICE = "SELECT unitPrice FROM products WHERE productId = ?;";
+	private static final String ADD_PRODUCT = "INSERT INTO Products(productName, productImage, unitPrice, category) VALUES(?, ?, ?, ?);";
+	private static final String DELETE_PRODUCT = "DELETE FROM Products WHERE productId = ?;";
+	private static final String UPDATE_PRODUCT = "UPDATE Products SET productName = ?, productImage = ?, unitPrice = ?, category = ? WHERE productId = ?;";
 
 	public ProductDao(Connection connection) {
 		this.connection = connection;
@@ -104,5 +107,149 @@ public class ProductDao {
 		}
 
 		return sum;
+	}
+	
+	/*
+	 * Adding a product to the app/website and database.
+	 */
+	public boolean addProduct(String name, String image, double price, String category)
+	{
+		boolean added;
+		int status = 0;
+		
+		try
+		{
+			PreparedStatement preparedStatement = this.connection.prepareStatement(ADD_PRODUCT);
+			preparedStatement.setString(1, name);
+			preparedStatement.setString(2, image);
+			preparedStatement.setDouble(3, price);
+			preparedStatement.setString(4, category);
+			
+			status = preparedStatement.executeUpdate();
+		}
+		
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		if(status == 1)
+		{
+			added = true;
+		}
+		
+		else
+		{
+			added = false;
+		}
+		
+		return added;
+	}
+	
+	/*
+	 * Updating a product on the app/website and database.
+	 */
+	public boolean updateProduct(int id, String name, String image, double price, String category)
+	{
+		boolean updated;
+		int status = 0;
+		
+		try
+		{
+			PreparedStatement preparedStatement = this.connection.prepareStatement(UPDATE_PRODUCT);
+			preparedStatement.setString(1, name);
+			preparedStatement.setString(2, image);
+			preparedStatement.setDouble(3, price);
+			preparedStatement.setString(4, category);
+			preparedStatement.setInt(5, id);
+			
+			status = preparedStatement.executeUpdate();
+		}
+		
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		if(status == 1)
+		{
+			updated = true;
+		}
+		
+		else
+		{
+			updated = false;
+		}
+		
+		return updated;
+	}
+	
+	/*
+	 * Deleting a product from the app/website and database.
+	 */
+	public boolean deleteProduct(int id)
+	{
+		boolean deleted;
+		int status = 0;
+		
+		try
+		{
+			PreparedStatement preparedStatement = this.connection.prepareStatement(DELETE_PRODUCT);
+			preparedStatement.setInt(1, id);
+			
+			status = preparedStatement.executeUpdate();
+		}
+		
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		if(status == 1)
+		{
+			deleted = true;
+		}
+		
+		else
+		{
+			deleted = false;
+		}
+		
+		return deleted;
+	}
+	
+	/*
+	 * Retrieve a single product.
+	 */
+	public Product getSingleProduct(int id) 
+	{
+		 Product row = null;
+		 
+	     try 
+	     {
+	    	 PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_ID);
+	    	 preparedStatement.setInt(1, id);
+	         ResultSet rs = preparedStatement.executeQuery();
+
+	         while (rs.next()) 
+	         {
+	        	 row = new Product();
+	             row.setProductId(rs.getInt("productId"));
+	             row.setProductName(rs.getString("productName"));
+	             row.setProductImage(rs.getString("productImage"));
+	             row.setUnitPrice(rs.getDouble("unitPrice"));
+	             row.setCategory(rs.getString("category"));
+	        }
+	    } 
+	        
+	    catch (Exception e) 
+	    {
+	        e.printStackTrace();
+	    }
+
+	    return row;
 	}
 }
