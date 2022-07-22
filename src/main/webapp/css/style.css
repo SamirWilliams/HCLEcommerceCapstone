@@ -87,6 +87,17 @@ table {
     background: #333399;
 }
 
+.my-card {
+    box-shadow: 0 0 20px 2px rgba(0, 0, 0, .1);
+    transition:1s;
+    cursor: pointer;
+}
+
+.my-card:hover{
+    transform:scale(1.1);
+    z-index:1;
+}
+
 .text-muted {
     color: #b1beca !important;
 }

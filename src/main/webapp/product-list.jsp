@@ -27,7 +27,7 @@
 </head>
 <body class="gradient-custom1">
 <%@ include file="includes/navbar.jsp" %>
-
+<%@ include file="includes/cat-navbar.jsp" %>
 <div class="container">
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
         <a href="index.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
@@ -47,7 +47,7 @@
             for (Product p : productList) {
                 if (p.getCategory().equals(productChoice)) { %>
         <div class="my-3 mx-3 d-flex">
-            <div class="card" style="width: 18rem;">
+            <div class="card my-card" style="width: 18rem;">
                 <img class="card-img-top" src="assets/product-image/<%= p.getProductImage() %>" width = "200" height="300" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><%= p.getProductName() %>

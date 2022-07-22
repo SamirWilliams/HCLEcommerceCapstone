@@ -1,15 +1,26 @@
 <style type = "text/css">
-.dropdown-menu> a:hover {
-  background-color: #b82e95 !important;
-}
-.btn:hover{
-    background-color: #b82e95;
-    border-color: #b82e95;
-}
+    .dropdown-menu> a:hover {
+      background-color: #b82e95 !important;
+    }
+    .btn:hover{
+        background-color: #b82e95;
+        border-color: #b82e95;
+    }
 </style>
 <nav style="background: #772593" class="navbar navbar-expand-lg navbar-dark">
     <div class="d-flex align-items-center justify-content-between" style="width: 100%">
         <a style="font-size: 25px" class="navbar-brand fw-bold ms-5 my-1" href="index.jsp">Ecommerce Shopping <i style="font-size: 30px" class="fas fa-dolly"></i></a>
+        <div class="col-md-5">
+            <form style="margin-bottom: 0;" role="search" method="post" action="search.jsp">
+                <div class="input-group">
+                    <input type="search" name="search_bar"
+                           placeholder="Search your product" class="form-control" />
+                    <button class="btn bg-white" name="save" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

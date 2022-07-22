@@ -28,10 +28,10 @@
 				<div class = "col-md-15 my-3">
 					<div class = "card w-100">
 						<div class = "card-body text-left" style = "background: #772593; width: 900px;">
-							<h6 class = "image my-1">Image (.jpg): <input type = "text" class = "form-control my-2" name = "prodimage" placeholder = "ImageName.jpg">
+							<h6 class = "image my-1">Image (.jpg): <input type = "text" class = "form-control my-2" name = "prodimage" placeholder = "ImageName.jpg"></h6>
 							<h6 class = "name my-3">Product Name*: <input type = "name" class = "form-control my-2" name = "prodname" placeholder = "Enter Product Name" required></h6>
 							<h6 class = "price my-4">Product Price*: $<input type = "text" class = "form-control my-2" name = "prodprice" placeholder = "Enter Product Price" required></h6>
-							<h6 class = "category my-4">Product Category*: <input type = "text" class = "form-control my-2" name = "prodcategory" placeholder = "Enter Product Category" required></h6>	
+							<h6 class = "category my-4">Product Category*: <input type = "text" class = "form-control my-2" name = "prodcategory" placeholder = "Enter Product Category" required></h6>
 							<div class = "text-center">
 								<button class = "btn btn-primary my-2" style = "background: #333399">Post</button>
 							</div>

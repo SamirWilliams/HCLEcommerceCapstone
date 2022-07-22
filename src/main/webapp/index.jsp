@@ -7,6 +7,7 @@
 </head>
 <body class="gradient-custom1">
 <%@ include file="includes/navbar.jsp" %>
+<%@ include file="includes/cat-navbar.jsp" %>
 <div class="container">
     <div class="card-header text-center my-3"><h1>Product Categories</h1></div>
     <div class="row">
