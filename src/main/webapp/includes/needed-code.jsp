@@ -1,5 +1,5 @@
-<%@ page import="com.usermanagement.model.User" %>
-<%@ page import="com.usermanagement.model.Cart" %>
+<%@ page import="com.ecommercecapstone.model.User" %>
+<%@ page import="com.ecommercecapstone.model.Cart" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>

@@ -1,4 +1,4 @@
-<%@ page import="com.usermanagement.model.User" %>
+<%@ page import="com.ecommercecapstone.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ include file="includes/needed-code.jsp"%>

@@ -1,7 +1,7 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.usermanagement.model.Order" %>
-<%@ page import="com.usermanagement.dao.OrderDao" %>
-<%@ page import="com.usermanagement.connection.DBCon" %>
+<%@ page import="com.ecommercecapstone.model.Order" %>
+<%@ page import="com.ecommercecapstone.dao.OrderDao" %>
+<%@ page import="com.ecommercecapstone.connection.DBCon" %>
 <%@ include file="includes/needed-code.jsp" %>
 
 <%

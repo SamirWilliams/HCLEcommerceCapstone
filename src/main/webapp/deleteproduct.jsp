@@ -1,6 +1,6 @@
-<%@ page import="com.usermanagement.model.Product" %>
-<%@ page import="com.usermanagement.dao.ProductDao" %>
-<%@ page import="com.usermanagement.connection.DBCon" %>
+<%@ page import="com.ecommercecapstone.model.Product" %>
+<%@ page import="com.ecommercecapstone.dao.ProductDao" %>
+<%@ page import="com.ecommercecapstone.connection.DBCon" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="includes/needed-code.jsp" %>

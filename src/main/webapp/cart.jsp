@@ -1,7 +1,7 @@
-<%@ page import="com.usermanagement.model.Cart" %>
+<%@ page import="com.ecommercecapstone.model.Cart" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.usermanagement.dao.ProductDao" %>
-<%@ page import="com.usermanagement.connection.DBCon" %>
+<%@ page import="com.ecommercecapstone.dao.ProductDao" %>
+<%@ page import="com.ecommercecapstone.connection.DBCon" %>
 
 <%@ include file="includes/needed-code.jsp" %>
 
