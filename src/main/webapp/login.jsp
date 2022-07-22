@@ -15,7 +15,7 @@
     <title>Login</title>
 </head>
 <body class="gradient-custom1">
-<%@ include file="includes/navbar.jsp" %>
+<%@ include file="includes/navbar-principal.jsp" %>
 <div class="container">
     <div class="card w-50 mx-auto my-5">
         <%

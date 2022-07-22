@@ -11,12 +11,10 @@
     if (auth != null) {
         request.setAttribute("auth", auth);
     }
-
     ArrayList<Cart> cart_List = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
     if (cart_List != null) {
         request.setAttribute("cart_list", cart_List);
     }
-
     NumberFormat nf = NumberFormat.getInstance();
     nf.setMaximumFractionDigits(2);
     nf.setMinimumFractionDigits(2);

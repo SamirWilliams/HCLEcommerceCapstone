@@ -18,7 +18,7 @@
 
 <html>
 <head>
-    <%@ include file="includes/header.jsp" %>
+   <%@ include file="includes/navbar-principal.jsp" %>
     <title>Edit User</title>
 </head>
 <body class="gradient-custom1">

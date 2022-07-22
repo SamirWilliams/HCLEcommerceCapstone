@@ -9,6 +9,7 @@
 <html>
 <head>
     <%@ include file="includes/header.jsp" %>
+   
     <title>Admin Register</title>
 </head>
 <body class="gradient-custom1">

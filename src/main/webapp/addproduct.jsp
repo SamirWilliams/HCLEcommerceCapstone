@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="includes/header.jsp" %>
+    <%@ include file="includes/navbar-principal.jsp" %>
     <title>Add Product</title>
 </head>
 <body class="gradient-custom1">

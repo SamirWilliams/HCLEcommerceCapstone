@@ -16,7 +16,7 @@ List<Product> products = prd.getAllProducts();
     <title>Delete Product</title>
 </head>
 <body class="gradient-custom1">
-<%@ include file="includes/navbar.jsp" %>
+<%@ include file="includes/navbar-principal.jsp" %>
 <div class = "container">
 <div class = "card w-100 mx-auto my-5">
 <div class = "p-2 mb-1" style = "background: #772593"><h4 class = "card-header text-center" style = "background: #772593">Delete Product</h4></div>

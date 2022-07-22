@@ -6,6 +6,8 @@
         response.sendRedirect("index.jsp");
     }
 
+	
+
 	boolean adminAccountChange = false;
 	if (request.getSession().getAttribute("adminAccountChange") != null) {
         adminAccountChange = (boolean) request.getSession().getAttribute("adminAccountChange");
@@ -25,7 +27,7 @@
     <title>Users</title>
 </head>
 <body class="gradient-custom1">
-<%@ include file="includes/navbar.jsp" %>
+<%@ include file="includes/navbar-principal.jsp" %>
 <div class="container">
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
         <h1 class="flex-grow-1 text-center">List of Users</h1>

@@ -22,11 +22,47 @@
 
 <html>
 <head>
+<style>
+.my-container {
+	margin-top: 20px;
+}
+
+#my-image{
+	border-radius: 5px;
+}
+
+.my-row {
+	
+}
+
+.my-col {
+	
+}
+
+#my-card {
+	box-shadow: 0 0 20px 2px rgba(0, 0, 0, .1);
+	transition:2s;
+	cursor: poiter;
+}
+
+#my-card:hover{
+	transform:scale(1.1);
+	z-index:1;
+}
+
+
+
+.my-bod {
+	height: 10%;
+}
+</style>
+
+
     <%@ include file="includes/header.jsp" %>
     <title><%= productChoice %>s</title>
 </head>
 <body class="gradient-custom1">
-<%@ include file="includes/navbar.jsp" %>
+<%@ include file="includes/navbar-principal.jsp" %>
 
 <div class="container">
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
@@ -42,12 +78,12 @@
     <h3 style='color:black; text-align: center'>Item Added to Cart</h3>
     <% request.getSession().setAttribute("addedToCart", false);
     } %>
-    <div class="card-group">
+    <div class="card-group" >
         <% if (!productList.isEmpty()) {
             for (Product p : productList) {
                 if (p.getCategory().equals(productChoice)) { %>
         <div class="my-3 mx-3 d-flex">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 18rem;" id = "my-card">
                 <img class="card-img-top" src="assets/product-image/<%= p.getProductImage() %>" width = "200" height="300" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><%= p.getProductName() %>

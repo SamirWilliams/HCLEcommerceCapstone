@@ -22,7 +22,7 @@
     <title>Orders</title>
 </head>
 <body class="gradient-custom1">
-<%@ include file="includes/navbar.jsp" %>
+<%@ include file="includes/navbar-principal.jsp" %>
 
 <div class="container table-responsive">
     <div class="card-header my-3 fw-bold">All Orders</div>

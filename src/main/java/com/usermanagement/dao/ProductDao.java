@@ -19,6 +19,7 @@ public class ProductDao {
 	private static final String ADD_PRODUCT = "INSERT INTO Products(productName, productImage, unitPrice, category) VALUES(?, ?, ?, ?);";
 	private static final String DELETE_PRODUCT = "DELETE FROM Products WHERE productId = ?;";
 	private static final String UPDATE_PRODUCT = "UPDATE Products SET productName = ?, productImage = ?, unitPrice = ?, category = ? WHERE productId = ?;";
+	private static final String SELECT_PRODUCT_BY_NAME = "SELECT * FROM products WHERE productName = ?;";
 
 	public ProductDao(Connection connection) {
 		this.connection = connection;
@@ -252,4 +253,56 @@ public class ProductDao {
 
 	    return row;
 	}
+	
+	
+	
+	
+	//Search-bar operation dao
+	
+	public Product getProductByName(String name) {
+		Product row = null;
+	
+		try {
+			
+			
+			PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_NAME);
+			preparedStatement.setString(1, name);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				row = new Product();
+				row.setProductId(resultSet.getInt("productId"));
+				row.setProductName(resultSet.getString("productName"));
+				row.setCategory(resultSet.getString("category"));
+				row.setUnitPrice(resultSet.getDouble("unitPrice"));
+				row.setProductImage(resultSet.getString("productImage"));
+				
+			}
+		}catch (Exception e ) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return row;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

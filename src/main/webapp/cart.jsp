@@ -22,7 +22,7 @@
     <title>Shopping Cart</title>
 </head>
 <body class="gradient-custom1">
-<%@ include file="includes/navbar.jsp" %>
+<%@ include file="includes/navbar-principal.jsp" %>
 
 <div class="container table-responsive">
     <form action="cart-check-out" method="post" class="d-flex">
