@@ -1,6 +1,6 @@
-package com.usermanagement.web;
+package com.ecommercecapstone.web;
 
-import com.usermanagement.model.Cart;
+import com.ecommercecapstone.model.Cart;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,6 +1,6 @@
-package com.usermanagement.dao;
+package com.ecommercecapstone.dao;
 
-import com.usermanagement.model.User;
+import com.ecommercecapstone.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

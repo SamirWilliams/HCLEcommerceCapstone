@@ -1,8 +1,8 @@
-package com.usermanagement.web;
+package com.ecommercecapstone.web;
 
-import com.usermanagement.connection.DBCon;
-import com.usermanagement.dao.UserDao;
-import com.usermanagement.model.User;
+import com.ecommercecapstone.connection.DBCon;
+import com.ecommercecapstone.dao.UserDao;
+import com.ecommercecapstone.model.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;

@@ -1,4 +1,4 @@
-package com.usermanagement.web;
+package com.ecommercecapstone.web;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

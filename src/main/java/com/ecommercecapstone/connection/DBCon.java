@@ -1,4 +1,4 @@
-package com.usermanagement.connection;
+package com.ecommercecapstone.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

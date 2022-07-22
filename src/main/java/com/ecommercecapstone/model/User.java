@@ -1,4 +1,4 @@
-package com.usermanagement.model;
+package com.ecommercecapstone.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

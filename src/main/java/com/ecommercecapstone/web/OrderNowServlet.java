@@ -1,10 +1,10 @@
-package com.usermanagement.web;
+package com.ecommercecapstone.web;
 
-import com.usermanagement.connection.DBCon;
-import com.usermanagement.dao.OrderDao;
-import com.usermanagement.model.Cart;
-import com.usermanagement.model.Order;
-import com.usermanagement.model.User;
+import com.ecommercecapstone.connection.DBCon;
+import com.ecommercecapstone.dao.OrderDao;
+import com.ecommercecapstone.model.Cart;
+import com.ecommercecapstone.model.Order;
+import com.ecommercecapstone.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,7 +1,7 @@
-package com.usermanagement.dao;
+package com.ecommercecapstone.dao;
 
-import com.usermanagement.model.Cart;
-import com.usermanagement.model.Product;
+import com.ecommercecapstone.model.Cart;
+import com.ecommercecapstone.model.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
