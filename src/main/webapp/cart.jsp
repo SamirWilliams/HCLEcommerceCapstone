@@ -28,7 +28,7 @@
     <form action="cart-check-out" method="post" class="d-flex">
         <div class="mt-3 mb-1 w-100 d-flex align-items-center">
             <h3 style="color: black" class="fw-bold">Total Price: <fmt:formatNumber value="${(cart_total > 0)?cart_total:0.00}" type="currency"/></h3>
-            <button class="mx-3 ms-auto btn btn-primary">Check Out</button>
+            <button class="mx-3 ms-auto btn btn-primary"><i class="fa-solid fa-credit-card"></i> Check Out</button>
         </div>
     </form>
 

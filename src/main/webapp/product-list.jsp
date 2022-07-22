@@ -30,7 +30,7 @@
 
 <div class="container">
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
-        <a href="index.jsp" class="col-md-1 btn btn-primary">Back</a>
+        <a href="index.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
         <h1 class="flex-grow-1 text-center me-5"><%= productChoice %>s</h1>
     </div>
     <%
@@ -48,7 +48,7 @@
                 if (p.getCategory().equals(productChoice)) { %>
         <div class="my-3 mx-3 d-flex">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="assets/product-image/<%= p.getProductImage() %>" alt="Card image cap">
+                <img class="card-img-top" src="assets/product-image/<%= p.getProductImage() %>" width = "200" height="300" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><%= p.getProductName() %>
                     </h5>
