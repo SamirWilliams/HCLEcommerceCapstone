@@ -25,6 +25,7 @@ public class AddProductServlet extends HttpServlet {
 			String image = request.getParameter("prodimage");
 			String category = request.getParameter("prodcategory");
 			double price = Double.parseDouble(request.getParameter("prodprice"));
+			request.getSession().setAttribute("category", category);
 
 			ProductDao productDao = new ProductDao(DBCon.getConnection());
 
@@ -33,10 +34,12 @@ public class AddProductServlet extends HttpServlet {
 				image = "Default.jpg";
 			}
 
-			productDao.addProduct(name, image, price, category);
-
-			request.getRequestDispatcher("index.jsp").include(request, response);
-			out.println("<h4 style = 'color: red; text-align: center'> Product Posted. </h4>");
+			boolean wasAdded = productDao.addProduct(name, image, price, category);
+			
+			if (wasAdded){
+				request.getSession().setAttribute("wasAdded", true);
+				response.sendRedirect("addproduct.jsp");
+			}
 		}
 	}
 }

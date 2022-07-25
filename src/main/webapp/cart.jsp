@@ -69,7 +69,7 @@
                     <div class="ms-auto align-self-end"></div>
                 </form>
             </td>
-            <td style="text-align: center"><a class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this item?')" href="remove-from-cart?id=<%=c.getProductId()%>">Remove</a></td>
+            <td style="text-align: center"><a class="btn btn-danger" onclick="return confirm('Are you sure you want to remove <%= c.getProductName() %>?')" href="remove-from-cart?id=<%=c.getProductId()%>">Remove</a></td>
         </tr>
         <% }
         } %>

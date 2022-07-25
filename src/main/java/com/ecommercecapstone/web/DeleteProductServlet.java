@@ -22,13 +22,18 @@ public class DeleteProductServlet extends HttpServlet {
 		try(PrintWriter out = response.getWriter())
 		{
 			int id = Integer.parseInt(request.getParameter("prodID"));
+			String category = request.getParameter("prodcategory");
+			request.getSession().setAttribute("category", category);
 
 			ProductDao productDao = new ProductDao(DBCon.getConnection());
 
-			productDao.deleteProduct(id);
-
-			request.getRequestDispatcher("index.jsp").include(request, response);
-			out.println("<h4 style = 'color: red; text-align: center'> Product Deleted. </h4>");
+			boolean wasDeleted = productDao.deleteProduct(id);
+			
+			if (wasDeleted){
+				request.getSession().setAttribute("wasDeleted", true);
+				response.sendRedirect("deleteproduct.jsp");
+			}
+			
 		}
 	}
 

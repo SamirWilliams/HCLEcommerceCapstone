@@ -26,6 +26,7 @@ public class UpdateProductServlet extends HttpServlet {
 			String image = request.getParameter("prodimage");
 			double price = Double.parseDouble(request.getParameter("prodprice"));
 			String category = request.getParameter("prodcategory");
+			request.getSession().setAttribute("category", category);
 
 			ProductDao productDao = new ProductDao(DBCon.getConnection());
 
@@ -34,9 +35,12 @@ public class UpdateProductServlet extends HttpServlet {
 				image = productDao.getSingleProduct(id).getProductImage();
 			}
 
-			productDao.updateProduct(id, name, image, price, category);
-			request.getRequestDispatcher("index.jsp").include(request, response);
-			out.println("<h4 style = 'color: red; text-align: center'> Product Updated. </h4>");
+			boolean wasUpdated = productDao.updateProduct(id, name, image, price, category);
+			
+			if (wasUpdated){
+				request.getSession().setAttribute("wasUpdated", true);
+				response.sendRedirect("updateproduct.jsp");
+			}
 		}
 	}
 
