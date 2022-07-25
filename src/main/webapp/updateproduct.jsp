@@ -36,7 +36,8 @@ if (wasUpdated) {%>
 <div class = "card-body">
 <div class = "row">
 	<%
-	for(Product p : products)
+		nf.setGroupingUsed(false);
+		for(Product p : products)
 	{%>
 		<div class = "col-md-3 my-3">
 			<form action = "update-product" method = "post">

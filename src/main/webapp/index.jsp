@@ -39,9 +39,9 @@
     <div class="row">
         <div class="col-md-4 my-2">
         <div class="card w-100 h-100 text-center" style="width: 18rem;">
-                <img class="card-img-top" src="http://localhost:8080/HCLEcommerceCapstone/assets/product-image/iPhone13ProMax.jpg" width = "300" height="500" alt="Card image cap">
+                <img class="card-img-top" src="assets/product-image/iPhone13ProMax.jpg" width = "300" height="500" alt="Card image cap">
                 <div class="card-body">
-                <div class= "text-danger my-1" style="font-weight: bold; font-size: 25">SALE</div>
+                <div class= "text-danger my-1" style="font-weight: bold; font-size: 25px">SALE</div>
                     <h5 class="card-title" style="font-weight: bold">Apple - iPhone 13 Pro Max
                     </h5>
                     <h6 class="price" style="font-weight: bold">Price: <del class="text-danger" style="font-style: italic">$1,199.00</del> $1,099.00 </h6>
@@ -58,9 +58,9 @@
 
         <div class="col-md-4 my-2">
         <div class="card w-100 h-100 text-center" style="width: 18rem;">
-                <img class="card-img-top" src="http://localhost:8080/HCLEcommerceCapstone/assets/product-image/ASUSVivoBook15.jpg" width = "300" height="500" alt="Card image cap">
+                <img class="card-img-top" src="assets/product-image/ASUSVivoBook15.jpg" width = "300" height="500" alt="Card image cap">
                 <div class="card-body">
-                <div class= "text-danger my-1" style="font-weight: bold; font-size: 25">SALE</div>
+                <div class= "text-danger my-1" style="font-weight: bold; font-size: 25px">SALE</div>
                     <h5 class="card-title" style="font-weight: bold">ASUS VivoBook 15
                     </h5>
                     <h6 class="price" style="font-weight: bold">Price: <del class="text-danger" style="font-style: italic">$999.00</del> $989.00 </h6>
@@ -77,9 +77,9 @@
         </div>
        <div class="col-md-4 my-2">
         <div class="card w-100 h-100 text-center" style="width: 18rem;">
-                <img class="card-img-top" src="http://localhost:8080/HCLEcommerceCapstone/assets/product-image/CyberpowerPCGamingDesktop.jpg" width = "300" height="500" alt="Card image cap">
+                <img class="card-img-top" src="assets/product-image/CyberpowerPCGamingDesktop.jpg" width = "300" height="500" alt="Card image cap">
                 <div class="card-body">
-                <div class= "text-danger my-1" style="font-weight: bold; font-size: 25">SALE</div>
+                <div class= "text-danger my-1" style="font-weight: bold; font-size: 25px">SALE</div>
                     <h5 class="card-title" style="font-weight: bold">Cyberpower PC Gaming Desktop
                     </h5>
                     <h6 class="price" style="font-weight: bold">Price: <del class="text-danger" style="font-style: italic">$1,999.00</del> $1,839.00 </h6>
