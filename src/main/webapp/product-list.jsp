@@ -29,25 +29,26 @@
 <%@ include file="includes/navbar.jsp" %>
 <%@ include file="includes/cat-navbar.jsp" %>
 <div class="container">
-    <div class="card-header my-3 d-flex justify-content-between align-items-center">
-        <a href="index.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
-        <h1 class="flex-grow-1 text-center me-5"><%= productChoice %>s</h1>
-    </div>
-    <%
-        if (alreadyInCart) { %>
+<%
+    if (alreadyInCart) { %>
     <h3 style='color:crimson; text-align: center'>Item Already in Cart</h3>
     <% request.getSession().setAttribute("alreadyInCart", false);
-		}
-        if (addedToCart) { %>
+	}
+    if (addedToCart) { %>
     <h3 style='color:black; text-align: center'>Item Added to Cart</h3>
     <% request.getSession().setAttribute("addedToCart", false);
-    } %>
+    } 
+%>
+    <div class="card-header my-3 d-flex justify-content-between align-items-center">
+        <a href="allcategories.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
+        <h1 class="flex-grow-1 text-center me-5"><%= productChoice %>s</h1>
+    </div>
     <div class="card-group">
         <% if (!productList.isEmpty()) {
             for (Product p : productList) {
                 if (p.getCategory().equals(productChoice)) { %>
         <div class="my-3 mx-3 d-flex">
-            <div class="card my-card" style="width: 18rem;">
+            <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="assets/product-image/<%= p.getProductImage() %>" width = "200" height="300" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><%= p.getProductName() %>
@@ -58,7 +59,7 @@
                 <div class="card-footer">
                     <div class="mx-1 d-flex justify-content-between">
                         <a href="order-now?quantity=1&id=<%= p.getProductId() %>&price=<%= p.getUnitPrice() %>" class="btn btn-primary">Buy Now</a>
-                        <a href="add-to-cart?id=<%= p.getProductId() %>&price=<%= p.getUnitPrice() %>"
+                        <a href="add-to-cart?id=<%= p.getProductId() %>&price=<%= p.getUnitPrice() %>&pagetype=0"
                            class="btn btn-outline-primary">Add to Cart</a>
                     </div>
                 </div>

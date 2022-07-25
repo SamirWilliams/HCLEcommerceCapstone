@@ -8,6 +8,13 @@
 List<Product> productList = (List<Product>) request.getSession().getAttribute("productList");
 ProductDao prd = new ProductDao(DBCon.getConnection());
 List<Product> products = prd.getAllProducts();
+
+boolean wasDeleted = false;
+if (request.getSession().getAttribute("wasDeleted") != null) {
+	wasDeleted = (boolean) request.getSession().getAttribute("wasDeleted");
+}
+
+String productChoice = (String) request.getSession().getAttribute("category");
 %>
 <!DOCTYPE html>
 <html>
@@ -18,6 +25,12 @@ List<Product> products = prd.getAllProducts();
 <body class="gradient-custom1">
 <%@ include file="includes/navbar.jsp" %>
 <div class = "container">
+<%
+if (wasDeleted) {%>
+            <p style="margin-top: 20px; margin-bottom: -20px; text-align: center; color: red; font-size: 25px; font-weight: bold"> Product Deleted.</p>
+            <% request.getSession().setAttribute("wasDeleted", false);
+}
+%>
 <div class = "card w-100 mx-auto my-5">
 <div class = "p-2 mb-1" style = "background: #772593"><h4 class = "card-header text-center" style = "background: #772593">Delete Product</h4></div>
 <div class = "card-body">

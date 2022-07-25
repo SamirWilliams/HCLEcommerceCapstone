@@ -1,48 +1,97 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.ecommercecapstone.model.Product" %>
 <%@ include file="includes/needed-code.jsp"%>
+<%
+	List<Product> productList = (List<Product>) request.getSession().getAttribute("productList");
+	String productChoice = (String) request.getSession().getAttribute("category");
+	String productId = (String) request.getSession().getAttribute("id");
+	
+	boolean alreadyInCart = false;
+    if (request.getSession().getAttribute("alreadyInCart") != null) {
+        alreadyInCart = (Boolean) request.getSession().getAttribute("alreadyInCart");
+    }
 
+    boolean addedToCart = false;
+    if (request.getSession().getAttribute("addedToCart") != null) {
+        addedToCart = (Boolean) request.getSession().getAttribute("addedToCart");
+    }
+%>
 <html>
 <head>
     <%@ include file="includes/header.jsp" %>
-    <title>Welcome</title>
+    <title>Home</title>
 </head>
 <body class="gradient-custom1">
 <%@ include file="includes/navbar.jsp" %>
 <%@ include file="includes/cat-navbar.jsp" %>
 <div class="container">
-    <div class="card-header text-center my-3"><h1>Product Categories</h1></div>
+<%
+    if (alreadyInCart) { %>
+    <h3 style='color:crimson; text-align: center'>Item Already in Cart</h3>
+    <% request.getSession().setAttribute("alreadyInCart", false);
+	}
+    if (addedToCart) { %>
+    <h3 style='color:black; text-align: center'>Item Added to Cart</h3>
+    <% request.getSession().setAttribute("addedToCart", false);
+    } 
+%>
+    <div class="card-header text-center my-3"><h1><i class="fa-solid fa-fire"></i> Hot Products</h1></div>
     <div class="row">
-        <div class="col-md-4 my-3">
-            <div class="card w-100 h-100 text-center" style="width: 18rem;">
+        <div class="col-md-4 my-2">
+        <div class="card w-100 h-100 text-center" style="width: 18rem;">
+                <img class="card-img-top" src="http://localhost:8080/HCLEcommerceCapstone/assets/product-image/iPhone13ProMax.jpg" width = "300" height="500" alt="Card image cap">
                 <div class="card-body">
-                	<a href="product?cat=Phone"><img src = "https://i.pcmag.com/imagery/articles/00h6w5mO2CNC9tgOnu0u04N-5.fit_lim.size_1600x900.v1601499805.jpg" width = "300" height = "300"></a>
-                    <h4 class="card-title my-2">Phones</h4>
-                    <div>
-                        <a href="product?cat=Phone" class="btn btn-primary">Go</a>
+                <div class= "text-danger my-1" style="font-weight: bold; font-size: 25">SALE</div>
+                    <h5 class="card-title" style="font-weight: bold">Apple - iPhone 13 Pro Max
+                    </h5>
+                    <h6 class="price" style="font-weight: bold">Price: <del class="text-danger" style="font-style: italic">$1,199.00</del> $1,099.00 </h6>
+                </div>
+                <div class="card-footer">
+                    <div class="mx-5 d-flex justify-content-between">
+                        <a href="order-now?quantity=1&id=3&price=1099.00" class="btn btn-primary">Buy Now</a>
+                        <a href="add-to-cart?id=3&price=1099.00&pagetype=1"
+                           class="btn btn-outline-primary">Add to Cart</a>
                     </div>
                 </div>
-            </div>
         </div>
-        <div class="col-md-4 my-3">
-            <div class="card w-100 h-100 text-center" style="width: 18rem;">
-                <div class="card-body">
-                	<a href="product?cat=Laptop"><img src = "https://cdn.shopify.com/s/files/1/0299/6495/9881/articles/best_laptop_2017_main_review_stuff-3-833x474_1170x.png?v=1591887931" width = "300" height = "300"></a>
-                    <h4 class="card-title my-2">Laptops</h4>
-                    <div>
-                        <a href="product?cat=Laptop" class="btn btn-primary">Go</a>
-                    </div>
-                </div>
-            </div>
         </div>
-        <div class="col-md-4 my-3">
-            <div class="card w-100 h-100 text-center" style="width: 18rem;">
+
+        <div class="col-md-4 my-2">
+        <div class="card w-100 h-100 text-center" style="width: 18rem;">
+                <img class="card-img-top" src="http://localhost:8080/HCLEcommerceCapstone/assets/product-image/ASUSVivoBook15.jpg" width = "300" height="500" alt="Card image cap">
                 <div class="card-body">
-                <a href="product?cat=Desktop"><img src = "https://static.turbosquid.com/Preview/2019/12/12__07_47_48/001.jpgFA7C74F9-9769-4697-977E-9798EC170A58Large.jpg" width = "300" height = "300"></a>
-                    <h4 class="card-title my-2">Desktops</h4>
-                    <div>
-                        <a href="product?cat=Desktop" class="btn btn-primary">Go</a>
+                <div class= "text-danger my-1" style="font-weight: bold; font-size: 25">SALE</div>
+                    <h5 class="card-title" style="font-weight: bold">ASUS VivoBook 15
+                    </h5>
+                    <h6 class="price" style="font-weight: bold">Price: <del class="text-danger" style="font-style: italic">$999.00</del> $989.00 </h6>
+                </div>
+                <div class="card-footer">
+                    <div class="mx-5 d-flex justify-content-between">
+                        <a href="order-now?quantity=1&id=4&price=989.00" class="btn btn-primary">Buy Now</a>
+                        <a href="add-to-cart?id=4&price=989.00&pagetype=1"
+                           class="btn btn-outline-primary">Add to Cart</a>
                     </div>
                 </div>
-            </div>
+        </div>
+        
+        </div>
+       <div class="col-md-4 my-2">
+        <div class="card w-100 h-100 text-center" style="width: 18rem;">
+                <img class="card-img-top" src="http://localhost:8080/HCLEcommerceCapstone/assets/product-image/CyberpowerPCGamingDesktop.jpg" width = "300" height="500" alt="Card image cap">
+                <div class="card-body">
+                <div class= "text-danger my-1" style="font-weight: bold; font-size: 25">SALE</div>
+                    <h5 class="card-title" style="font-weight: bold">Cyberpower PC Gaming Desktop
+                    </h5>
+                    <h6 class="price" style="font-weight: bold">Price: <del class="text-danger" style="font-style: italic">$1,999.00</del> $1,839.00 </h6>
+                </div>
+                <div class="card-footer">
+                    <div class="mx-5 d-flex justify-content-between">
+                        <a href="order-now?quantity=1&id=7&price=1839.00" class="btn btn-primary">Buy Now</a>
+                        <a href="add-to-cart?id=7&price=1839.00&pagetype=1"
+                           class="btn btn-outline-primary">Add to Cart</a>
+                    </div>
+                </div>
+        </div>
         </div>
     </div>
 </div>
