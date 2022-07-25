@@ -30,8 +30,8 @@ public class ProductDao {
 	 */
 	public List<Product> getAllProducts() {
 		List<Product> productList = new ArrayList<>();
-		try {
-			PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_ALL_PRODUCTS);
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_ALL_PRODUCTS);){
+
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -117,9 +117,9 @@ public class ProductDao {
 		boolean added;
 		int status = 0;
 
-		try
+		try(PreparedStatement preparedStatement = this.connection.prepareStatement(ADD_PRODUCT);)
 		{
-			PreparedStatement preparedStatement = this.connection.prepareStatement(ADD_PRODUCT);
+
 			preparedStatement.setString(1, name);
 			preparedStatement.setString(2, image);
 			preparedStatement.setDouble(3, price);
@@ -155,9 +155,8 @@ public class ProductDao {
 		boolean updated;
 		int status = 0;
 		
-		try
+		try(PreparedStatement preparedStatement = this.connection.prepareStatement(UPDATE_PRODUCT);)
 		{
-			PreparedStatement preparedStatement = this.connection.prepareStatement(UPDATE_PRODUCT);
 			preparedStatement.setString(1, name);
 			preparedStatement.setString(2, image);
 			preparedStatement.setDouble(3, price);
