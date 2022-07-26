@@ -153,12 +153,12 @@ public class UserDao {
 						resultCode = 1;
 					}
 				} catch (SQLException e){
-					System.out.println("inner userRegister Error");
+					System.out.println("inner adminUserRegister Error");
 					printSQLException(e);
 				}
 			}
 		}catch (SQLException e) {
-			System.out.println("outer userRegister Error");
+			System.out.println("outer adminUserRegister Error");
 			printSQLException(e);
 		}
 
