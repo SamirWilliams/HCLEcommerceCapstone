@@ -10,16 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet("/delete-product")
 public class DeleteProductServlet extends HttpServlet {
+
+	Logger logger = Logger.getLogger(DeleteProductServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			doPost(request, response);
 		} catch (Exception e) {
-			System.out.println("DeleteProductServlet doGet error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "DeleteProductServlet doGet error: " + e.getMessage());
 		}
 	}
 
@@ -40,8 +43,7 @@ public class DeleteProductServlet extends HttpServlet {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("DeleteProductServlet doPost error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "DeleteProductServlet doPost error: " + e.getMessage());
 		}
 	}
 

@@ -12,17 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from navbar.jsp
 @WebServlet("/list-users")
 public class ListUserServlet extends HttpServlet {
 
+	Logger logger = Logger.getLogger(ListUserServlet.class.getName());
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			doGet(request, response);
 		} catch (Exception e) {
-			System.out.println("ListUserServlet doPost Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "ListUserServlet doPost error: " + e.getMessage());
 		}
 	}
 
@@ -35,8 +38,7 @@ public class ListUserServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("users.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
-			System.out.println("ListUserServlet doGet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "ListUserServlet doGet error: " + e.getMessage());
 		}
 	}
 

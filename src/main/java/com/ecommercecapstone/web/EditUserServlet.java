@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from admin-edit-user.jsp
 @WebServlet("/edit-user")
 public class EditUserServlet extends HttpServlet {
+
+	Logger logger = Logger.getLogger(EditUserServlet.class.getName());
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int resultCode;
@@ -60,8 +64,7 @@ public class EditUserServlet extends HttpServlet {
 				response.sendRedirect("list-users");
 			}
 		} catch (Exception e){
-			System.out.println("EditUserServlet doPost Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "EditUserServlet doPost error: " + e.getMessage());
 		}
 	}
 
@@ -69,8 +72,7 @@ public class EditUserServlet extends HttpServlet {
 		try {
 			doPost(request, response);
 		} catch (Exception e){
-			System.out.println("EditUserServlet doGet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "EditUserServlet doGet error: " + e.getMessage());
 		}
 	}
 

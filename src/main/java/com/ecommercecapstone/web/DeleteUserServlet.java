@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from users.jsp
 @WebServlet("/delete-user")
 public class DeleteUserServlet extends HttpServlet {
+
+	Logger logger = Logger.getLogger(DeleteProductServlet.class.getName());
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
@@ -39,8 +43,7 @@ public class DeleteUserServlet extends HttpServlet {
 				response.sendRedirect("list-users");
 			}
 		} catch (Exception e){
-			System.out.println("DeleteUserServlet doPost Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "DeleteUserServlet doPost error: " + e.getMessage());
 		}
 	}
 
@@ -48,8 +51,7 @@ public class DeleteUserServlet extends HttpServlet {
 		try {
 			doPost(request, response);
 		} catch (Exception e){
-			System.out.println("DeleteUserServlet doGet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "DeleteUserServlet doGet error: " + e.getMessage());
 		}
 	}
 }

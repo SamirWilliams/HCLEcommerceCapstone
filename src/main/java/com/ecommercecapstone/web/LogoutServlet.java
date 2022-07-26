@@ -5,11 +5,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from navbar.jsp
 @WebServlet("/user-logout")
 public class LogoutServlet extends HttpServlet {
 
+	Logger logger = Logger.getLogger(LogoutServlet.class.getName());
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			if (request.getSession().getAttribute("auth") != null) {
@@ -20,8 +23,7 @@ public class LogoutServlet extends HttpServlet {
 				response.sendRedirect("index.jsp");
 			}
 		} catch (Exception e){
-			System.out.println("LogoutServlet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "LogoutServlet error: " + e.getMessage());
 		}
 	}
 

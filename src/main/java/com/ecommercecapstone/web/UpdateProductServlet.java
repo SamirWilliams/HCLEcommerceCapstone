@@ -10,16 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet("/update-product")
 public class UpdateProductServlet extends HttpServlet {
+
+	Logger logger = Logger.getLogger(UpdateProductServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			doPost(request, response);
 		} catch (Exception e) {
-			System.out.println("UpdateProductServlet doGet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "UpdateProductServlet doGet error: " + e.getMessage());
 		}
 	}
 
@@ -47,8 +50,7 @@ public class UpdateProductServlet extends HttpServlet {
 				response.sendRedirect("updateproduct.jsp");
 			}
 		} catch (Exception e) {
-			System.out.println("UpdateProductServlet doPost Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "UpdateProductServlet doPost error: " + e.getMessage());
 		}
 	}
 

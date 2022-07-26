@@ -10,9 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet("/add-product")
 public class AddProductServlet extends HttpServlet {
+
+	Logger logger = Logger.getLogger(AddProductServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
@@ -41,8 +45,7 @@ public class AddProductServlet extends HttpServlet {
 				response.sendRedirect("addproduct.jsp");
 			}
 		} catch (Exception e) {
-			System.out.println("AddProductServlet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "AddProductServlet error: " + e.getMessage());
 		}
 	}
 }

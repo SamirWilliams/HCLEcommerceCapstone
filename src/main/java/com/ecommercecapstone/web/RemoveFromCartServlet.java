@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from cart.jsp
 @WebServlet("/remove-from-cart")
 public class RemoveFromCartServlet extends HttpServlet {
+
+	Logger logger = Logger.getLogger(RemoveFromCartServlet.class.getName());
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,8 +41,7 @@ public class RemoveFromCartServlet extends HttpServlet {
 				response.sendRedirect("cart.jsp");
 			}
 		} catch (Exception e){
-			System.out.println("RemoveFromCartServlet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "RemoveFromCartServlet doPost error: " + e.getMessage());
 		}
 	}
 }

@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from orders.jsp
 @WebServlet("/cancel-order")
 public class CancelOrderServlet extends HttpServlet {
+
+	Logger logger = Logger.getLogger(CancelOrderServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -29,8 +33,7 @@ public class CancelOrderServlet extends HttpServlet {
 			//Will always redirect user to orders.jsp regardless of success or failure
 			response.sendRedirect("orders.jsp");
 		} catch (Exception e){
-			System.out.println("CancelOrderServlet doGet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "CancelOrderServlet doGet error: " + e.getMessage());
 		}
 
 	}
@@ -39,8 +42,7 @@ public class CancelOrderServlet extends HttpServlet {
 		try {
 			doGet(request, response);
 		} catch (Exception e){
-			System.out.println("CancelOrderServlet doPost Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "CancelOrderServlet doPost error: " + e.getMessage());
 		}
 
 	}

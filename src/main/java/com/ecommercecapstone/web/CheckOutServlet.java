@@ -13,10 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from cart.jsp
 @WebServlet("/cart-check-out")
 public class CheckOutServlet extends HttpServlet {
+
+	Logger logger = Logger.getLogger(CheckOutServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
@@ -43,8 +47,7 @@ public class CheckOutServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("CheckOutServlet doGet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "CheckOutServlet doGet error: " + e.getMessage());
 		}
 	}
 
@@ -52,8 +55,7 @@ public class CheckOutServlet extends HttpServlet {
 		try {
 			doGet(request, response);
 		} catch (Exception e) {
-			System.out.println("CheckOutServlet doPost Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "CheckOutServlet doPost error: " + e.getMessage());
 		}
 	}
 }
