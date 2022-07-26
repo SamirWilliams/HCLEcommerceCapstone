@@ -16,7 +16,12 @@ import java.io.IOException;
 public class RegisterServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		try {
+			doPost(request, response);
+		} catch (Exception e) {
+			System.out.println("RegisterServlet doGet Error");
+			e.printStackTrace();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -73,7 +78,7 @@ public class RegisterServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("RegisterServlet Error");
+			System.out.println("RegisterServlet doPost Error");
 			e.printStackTrace();
 		}
 	}

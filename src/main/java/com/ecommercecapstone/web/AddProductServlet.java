@@ -40,6 +40,9 @@ public class AddProductServlet extends HttpServlet {
 				request.getSession().setAttribute("wasAdded", true);
 				response.sendRedirect("addproduct.jsp");
 			}
+		} catch (Exception e) {
+			System.out.println("AddProductServlet Error");
+			e.printStackTrace();
 		}
 	}
 }

@@ -17,7 +17,7 @@ if (request.getSession().getAttribute("wasUpdated") != null) {
 String productChoice = (String) request.getSession().getAttribute("category");
 %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <%@ include file="includes/header.jsp" %>
     <title>Update Product</title>

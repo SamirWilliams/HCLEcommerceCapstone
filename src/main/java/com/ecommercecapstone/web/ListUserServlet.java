@@ -17,9 +17,13 @@ import java.util.List;
 @WebServlet("/list-users")
 public class ListUserServlet extends HttpServlet {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			doGet(request, response);
+		} catch (Exception e) {
+			System.out.println("ListUserServlet doPost Error");
+			e.printStackTrace();
+		}
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +35,7 @@ public class ListUserServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("users.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
-			System.out.println("ListUserServlet Error");
+			System.out.println("ListUserServlet doGet Error");
 			e.printStackTrace();
 		}
 	}

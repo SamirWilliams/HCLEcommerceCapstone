@@ -15,8 +15,8 @@
         request.setAttribute("cart_total", total);
     }
 %>
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <%@ include file="includes/header.jsp" %>
     <title>Shopping Cart</title>
@@ -28,7 +28,7 @@
     <form action="cart-check-out" method="post" class="d-flex">
         <div class="mt-3 mb-1 w-100 d-flex align-items-center">
             <h3 style="color: black" class="fw-bold">Total Price: <fmt:formatNumber value="${(cart_total > 0)?cart_total:0.00}" type="currency"/></h3>
-            <button class="mx-3 ms-auto btn btn-primary"><i class="fa-solid fa-credit-card"></i> Check Out</button>
+            <button class="mx-3 ms-auto btn btn-primary"><em class="fa-solid fa-credit-card"></em> Check Out</button>
         </div>
     </form>
 
@@ -57,10 +57,10 @@
                         <input style="-webkit-appearance: none; -moz-appearance: textfield;" type="number" name="quantity" class="form-control w-75" value="<%=c.getQuantity()%>"
                                readonly>
                         <div class="d-flex flex-column justify-content-end">
-                            <a class="btn btn-sm btn-incre" href="quantity-inc-dec?action=inc&id=<%=c.getProductId()%>"><i
-                                class="fas fa-plus-square"></i></a>
-                            <a class="btn btn-sm btn-decre" href="quantity-inc-dec?action=dec&id=<%=c.getProductId()%>"><i
-                                    class="fas fa-minus-square"></i></a>
+                            <a class="btn btn-sm btn-incre" href="quantity-inc-dec?action=inc&id=<%=c.getProductId()%>"><em
+                                class="fas fa-plus-square"></em></a>
+                            <a class="btn btn-sm btn-decre" href="quantity-inc-dec?action=dec&id=<%=c.getProductId()%>"><em
+                                    class="fas fa-minus-square"></em></a>
                         </div>
                     </div>
                         <div class="ps-5 mt-3 ms-auto d-flex flex-column">

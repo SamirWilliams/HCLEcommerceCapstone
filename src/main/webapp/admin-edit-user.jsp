@@ -15,8 +15,8 @@
         }
     }
 %>
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <%@ include file="includes/header.jsp" %>
     <title>Edit User</title>
@@ -25,7 +25,7 @@
 
 <div class="container">
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
-        <a href="users.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
+        <a href="users.jsp" class="col-md-1 btn btn-primary"><em class="fa-solid fa-arrow-left"> Back</em></a>
         <h1 class="flex-grow-1 text-center me-5">Edit User</h1>
     </div>
     <div class="card w-50 mx-auto my-5">

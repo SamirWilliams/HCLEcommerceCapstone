@@ -39,12 +39,17 @@ public class DeleteUserServlet extends HttpServlet {
 				response.sendRedirect("list-users");
 			}
 		} catch (Exception e){
-			System.out.println("DeleteUserServlet Error");
+			System.out.println("DeleteUserServlet doPost Error");
 			e.printStackTrace();
 		}
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		try {
+			doPost(request, response);
+		} catch (Exception e){
+			System.out.println("DeleteUserServlet doGet Error");
+			e.printStackTrace();
+		}
 	}
 }

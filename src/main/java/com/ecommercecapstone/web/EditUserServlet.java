@@ -60,13 +60,18 @@ public class EditUserServlet extends HttpServlet {
 				response.sendRedirect("list-users");
 			}
 		} catch (Exception e){
-			System.out.println("EditUserServlet Error");
+			System.out.println("EditUserServlet doPost Error");
 			e.printStackTrace();
 		}
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		try {
+			doPost(request, response);
+		} catch (Exception e){
+			System.out.println("EditUserServlet doGet Error");
+			e.printStackTrace();
+		}
 	}
 
 }

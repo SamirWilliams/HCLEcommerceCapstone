@@ -42,14 +42,18 @@ public class CheckOutServlet extends HttpServlet {
 					response.sendRedirect("cart.jsp");
 				}
 			}
-		}catch (Exception e) {
-			System.out.println("CheckOutServlet Error");
+		} catch (Exception e) {
+			System.out.println("CheckOutServlet doGet Error");
 			e.printStackTrace();
 		}
 	}
 
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		try {
+			doGet(request, response);
+		} catch (Exception e) {
+			System.out.println("CheckOutServlet doPost Error");
+			e.printStackTrace();
+		}
 	}
 }

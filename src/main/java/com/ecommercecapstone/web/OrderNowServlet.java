@@ -64,12 +64,17 @@ public class OrderNowServlet extends HttpServlet {
 				response.sendRedirect("register.jsp");
 			}
 		} catch (Exception e){
-			System.out.println("OrderNowServlet Error");
+			System.out.println("OrderNowServlet doGet Error");
 			e.printStackTrace();
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		try {
+			doGet(request, response);
+		} catch (Exception e){
+			System.out.println("OrderNowServlet doPost Error");
+			e.printStackTrace();
+		}
 	}
 }

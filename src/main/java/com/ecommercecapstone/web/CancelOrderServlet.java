@@ -29,13 +29,19 @@ public class CancelOrderServlet extends HttpServlet {
 			//Will always redirect user to orders.jsp regardless of success or failure
 			response.sendRedirect("orders.jsp");
 		} catch (Exception e){
-			System.out.println("CancelOrderServlet Error");
+			System.out.println("CancelOrderServlet doGet Error");
 			e.printStackTrace();
 		}
 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		try {
+			doGet(request, response);
+		} catch (Exception e){
+			System.out.println("CancelOrderServlet doPost Error");
+			e.printStackTrace();
+		}
+
 	}
 }

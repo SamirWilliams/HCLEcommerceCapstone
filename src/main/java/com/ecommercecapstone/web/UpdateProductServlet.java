@@ -15,7 +15,12 @@ import java.io.PrintWriter;
 public class UpdateProductServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		try {
+			doPost(request, response);
+		} catch (Exception e) {
+			System.out.println("UpdateProductServlet doGet Error");
+			e.printStackTrace();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,6 +46,9 @@ public class UpdateProductServlet extends HttpServlet {
 				request.getSession().setAttribute("wasUpdated", true);
 				response.sendRedirect("updateproduct.jsp");
 			}
+		} catch (Exception e) {
+			System.out.println("UpdateProductServlet doPost Error");
+			e.printStackTrace();
 		}
 	}
 

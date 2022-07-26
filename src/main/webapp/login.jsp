@@ -8,8 +8,8 @@
         response.sendRedirect("index.jsp");
     } else {
 %>
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <%@ include file="includes/header.jsp" %>
     <title>Login</title>

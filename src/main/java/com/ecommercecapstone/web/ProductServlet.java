@@ -18,16 +18,19 @@ public class ProductServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
+		try {
+			ProductDao productDao = new ProductDao(DBCon.getConnection());
+			List<Product> productList = productDao.getAllProducts();
 
-		ProductDao productDao = new ProductDao(DBCon.getConnection());
-		List<Product> productList = productDao.getAllProducts();
+			String category = request.getParameter("cat");
 
-		String category = request.getParameter("cat");
+			request.getSession().setAttribute("category", category);//Sets the category of products to show
+			request.getSession().setAttribute("productList", productList);
 
-		request.getSession().setAttribute("category", category);//Sets the category of products to show
-		request.getSession().setAttribute("productList", productList);
-
-		response.sendRedirect("product-list.jsp");
+			response.sendRedirect("product-list.jsp");
+		} catch (Exception e) {
+			System.out.println("ProductServlet error");
+			e.printStackTrace();
+		}
 	}
-
 }

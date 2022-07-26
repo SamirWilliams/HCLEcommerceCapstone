@@ -31,7 +31,7 @@ public class ProductDao {
 	 */
 	public List<Product> getAllProducts() {
 		List<Product> productList = new ArrayList<>();
-		try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_ALL_PRODUCTS);){
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_ALL_PRODUCTS)){
 
 
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -58,10 +58,9 @@ public class ProductDao {
 	 */
 	public List<Cart> getCartProducts(List<Cart> cartList) {
 		List<Cart> products = new ArrayList<>();
-		try {
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_ID)) {
 			if (cartList.size() > 0) {
 				for (Cart item : cartList) {
-					PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_ID);
 					preparedStatement.setInt(1, item.getProductId());
 
 					ResultSet resultSet = preparedStatement.executeQuery();
@@ -89,10 +88,9 @@ public class ProductDao {
 	 */
 	public double getTotalCartPrice(ArrayList<Cart> cartList) {
 		double sum = 0;
-		try {
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_PRICE)) {
 			if (!cartList.isEmpty()) {
 				for (Cart item : cartList) {
-					PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_PRICE);
 					preparedStatement.setInt(1, item.getProductId());
 
 					ResultSet resultSet = preparedStatement.executeQuery();
@@ -228,9 +226,8 @@ public class ProductDao {
 	{
 		 Product row = null;
 
-	     try
+	     try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_ID))
 	     {
-	    	 PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_ID);
 	    	 preparedStatement.setInt(1, id);
 	         ResultSet rs = preparedStatement.executeQuery();
 
@@ -261,10 +258,7 @@ public class ProductDao {
 	public Product getProductByName(String name) {
 		Product row = null;
 
-		try {
-
-
-			PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_NAME);
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_NAME)) {
 			preparedStatement.setString(1, name);
 			ResultSet resultSet = preparedStatement.executeQuery();
 

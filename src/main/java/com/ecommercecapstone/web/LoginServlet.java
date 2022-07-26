@@ -16,7 +16,12 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.sendRedirect("login.jsp");
+		try {
+			response.sendRedirect("login.jsp");
+		} catch (Exception e) {
+			System.out.println("LoginServlet doGet Error");
+			e.printStackTrace();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
@@ -38,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-			System.out.println("LoginServlet Error");
+			System.out.println("LoginServlet doPost Error");
 			e.printStackTrace();
 		}
 	}

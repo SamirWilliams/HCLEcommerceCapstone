@@ -22,7 +22,7 @@
     }
 %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <%@ include file="includes/header.jsp" %>
     <title>Search</title>
@@ -43,7 +43,7 @@
     <%
         if (name.equalsIgnoreCase("phone") || name.equalsIgnoreCase("Phone") || name.equalsIgnoreCase("phones") || name.equalsIgnoreCase("Phones")) {%>
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
-        <a href="index.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
+        <a href="index.jsp" class="col-md-1 btn btn-primary"><em class="fa-solid fa-arrow-left"> Back</em></a>
         <h1 class="flex-grow-1 text-center me-5">Phones</h1>
     </div>
     <div class="card-group">
@@ -76,7 +76,7 @@
     </div>
     <%} else if (name.equalsIgnoreCase("laptop") || name.equalsIgnoreCase("Laptop") || name.equalsIgnoreCase("laptops") || name.equalsIgnoreCase("Laptops")) {%>
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
-        <a href="index.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
+        <a href="index.jsp" class="col-md-1 btn btn-primary"><em class="fa-solid fa-arrow-left"> Back</em></a>
         <h1 class="flex-grow-1 text-center me-5">Laptops</h1>
     </div>
     <div class="card-group">
@@ -109,7 +109,7 @@
     </div>
     <%} else if (name.equalsIgnoreCase("desktop") || name.equalsIgnoreCase("Desktops") || name.equalsIgnoreCase("Desktop") || name.equalsIgnoreCase("desktops")) {%>
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
-        <a href="index.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
+        <a href="index.jsp" class="col-md-1 btn btn-primary"><em class="fa-solid fa-arrow-left"> Back</em></a>
         <h1 class="flex-grow-1 text-center me-5">Desktops</h1>
     </div>
     <div class="card-group">
@@ -142,7 +142,7 @@
     </div>
     <%} else if (name.contains("google") || name.contains("GOOGLE") || name.contains("Google") || name.contains("PIXEL") || name.contains("Pixel") || name.contains("pixel")) {%>
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
-        <a href="index.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
+        <a href="index.jsp" class="col-md-1 btn btn-primary"><em class="fa-solid fa-arrow-left"> Back</em></a>
         <h1 class="flex-grow-1 text-center me-5">Google Products</h1>
     </div>
     <div class="card-group">
@@ -175,7 +175,7 @@
     </div>
     <%} else if (name.contains("apple") || name.contains("Apple") || name.contains("APPLE") || name.contains("iPhone") || name.contains("IPHONE") || name.contains("iphone") || name.contains("Iphone")) {%>
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
-        <a href="index.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
+        <a href="index.jsp" class="col-md-1 btn btn-primary"><em class="fa-solid fa-arrow-left"> Back</em></a>
         <h1 class="flex-grow-1 text-center me-5">Apple Products</h1>
     </div>
     <div class="card-group">
@@ -208,7 +208,7 @@
     </div>
     <%} else {%>
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
-        <a href="index.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
+        <a href="index.jsp" class="col-md-1 btn btn-primary"><em class="fa-solid fa-arrow-left"> Back</em></a>
         <h1 class="flex-grow-1 text-center me-5">Search Results</h1>
     </div>
     <div class="card-group">

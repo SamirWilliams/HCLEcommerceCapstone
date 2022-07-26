@@ -15,8 +15,8 @@
 
     int oId = 0;
 %>
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <%@ include file="includes/header.jsp" %>
     <title>Orders</title>

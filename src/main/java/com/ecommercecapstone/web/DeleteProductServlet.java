@@ -15,7 +15,12 @@ import java.io.PrintWriter;
 public class DeleteProductServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		try {
+			doPost(request, response);
+		} catch (Exception e) {
+			System.out.println("DeleteProductServlet doGet error");
+			e.printStackTrace();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,6 +39,9 @@ public class DeleteProductServlet extends HttpServlet {
 				response.sendRedirect("deleteproduct.jsp");
 			}
 			
+		} catch (Exception e) {
+			System.out.println("DeleteProductServlet doPost error");
+			e.printStackTrace();
 		}
 	}
 
