@@ -8,10 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserDao {
 
 	private Connection connection;
+
+	Logger logger = Logger.getLogger(UserDao.class.getName());
 
 	private static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE userId = ?;";
 	private static final String SELECT_ALL_USERS = "SELECT * FROM users;";
@@ -60,8 +64,7 @@ public class UserDao {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("userLogin Error");
-			printSQLException(e);
+			logger.log(Level.WARNING, ("userLogin Error: " + e.getMessage()));
 		}
 		return user;
 	}
@@ -103,13 +106,11 @@ public class UserDao {
 						resultCode = 1;
 					}
 				} catch (SQLException e){
-					System.out.println("inner userRegister Error");
-					printSQLException(e);
+					logger.log(Level.WARNING, ("inner userRegister Error: " + e.getMessage()));
 				}
 			}
 		}catch (SQLException e) {
-			System.out.println("outer userRegister Error");
-			printSQLException(e);
+			logger.log(Level.WARNING, ("outer userRegister Error: " + e.getMessage()));
 		}
 
 		return resultCode;
@@ -153,13 +154,11 @@ public class UserDao {
 						resultCode = 1;
 					}
 				} catch (SQLException e){
-					System.out.println("inner adminUserRegister Error");
-					printSQLException(e);
+					logger.log(Level.WARNING, ("inner adminUserRegister Error: " + e.getMessage()));
 				}
 			}
 		}catch (SQLException e) {
-			System.out.println("outer adminUserRegister Error");
-			printSQLException(e);
+			logger.log(Level.WARNING, ("outer adminUserRegister Error: " + e.getMessage()));
 		}
 
 		return resultCode;
@@ -188,8 +187,7 @@ public class UserDao {
 				users.add(new User(id, firstName, lastName, phoneNumber, address, city, zipCode, country, email, isAdmin));
 			}
 		} catch (SQLException e) {
-			System.out.println("selectAllUsers Error");
-			printSQLException(e);
+			logger.log(Level.WARNING, ("selectAllUsers Error: " + e.getMessage()));
 		}
 		return users;
 	}
@@ -205,8 +203,7 @@ public class UserDao {
 			preparedStatement.setInt(1, id);
 			rowDeleted = preparedStatement.executeUpdate() > 0;
 		} catch (SQLException e) {
-			System.out.println("deleteUser Error");
-			printSQLException(e);
+			logger.log(Level.WARNING, ("deleteUser Error: " + e.getMessage()));
 		}
 		return rowDeleted;
 	}
@@ -254,14 +251,12 @@ public class UserDao {
 						resultCode = 1;
 					}
 				} catch (SQLException e) {
-					System.out.println("inner updateUser Error");
-					printSQLException(e);
+					logger.log(Level.WARNING, ("inner updateUser Error: " + e.getMessage()));
 				}
 			}
 		}
 		catch (SQLException e) {
-			System.out.println("outer updateUser Error");
-			printSQLException(e);
+			logger.log(Level.WARNING, ("outer updateUser Error: " + e.getMessage()));
 		}
 		return resultCode;
 	}

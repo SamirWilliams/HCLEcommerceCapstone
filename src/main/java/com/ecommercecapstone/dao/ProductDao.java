@@ -8,11 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProductDao {
 
 	private Connection connection;
 
+	Logger logger = Logger.getLogger(ProductDao.class.getName());
 	private static final String SELECT_ALL_PRODUCTS = "SELECT * FROM products;";
 	private static final String SELECT_PRODUCT_BY_ID = "SELECT * FROM products WHERE productId = ?;";
 	private static final String SELECT_PRODUCT_BY_PRICE = "SELECT unitPrice FROM products WHERE productId = ?;";
@@ -46,7 +49,7 @@ public class ProductDao {
 				productList.add(product);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, ("getAllProducts Error: " + e.getMessage()));
 		}
 		return productList;
 	}
@@ -77,7 +80,7 @@ public class ProductDao {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, ("getCartProducts Error: " + e.getMessage()));
 		}
 		return products;
 	}
@@ -101,8 +104,7 @@ public class ProductDao {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("getTotalCartPrice Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, ("getTotalCartPrice Error: " + e.getMessage()));
 		}
 
 		return sum;
@@ -116,7 +118,7 @@ public class ProductDao {
 		boolean added;
 		int status = 0;
 
-		try(PreparedStatement preparedStatement = this.connection.prepareStatement(ADD_PRODUCT);)
+		try(PreparedStatement preparedStatement = this.connection.prepareStatement(ADD_PRODUCT))
 		{
 
 			preparedStatement.setString(1, name);
@@ -129,19 +131,10 @@ public class ProductDao {
 		
 		catch(Exception e)
 		{
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			logger.log(Level.WARNING, ("addProduct Error: " + e.getMessage()));
 		}
-		
-		if(status == 1)
-		{
-			added = true;
-		}
-		
-		else
-		{
-			added = false;
-		}
+
+		added = status == 1;
 		
 		return added;
 	}
@@ -154,7 +147,7 @@ public class ProductDao {
 		boolean updated;
 		int status = 0;
 		
-		try(PreparedStatement preparedStatement = this.connection.prepareStatement(UPDATE_PRODUCT);)
+		try(PreparedStatement preparedStatement = this.connection.prepareStatement(UPDATE_PRODUCT))
 		{
 			preparedStatement.setString(1, name);
 			preparedStatement.setString(2, image);
@@ -167,19 +160,10 @@ public class ProductDao {
 		
 		catch(Exception e)
 		{
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			logger.log(Level.WARNING, ("updateProduct Error: " + e.getMessage()));
 		}
-		
-		if(status == 1)
-		{
-			updated = true;
-		}
-		
-		else
-		{
-			updated = false;
-		}
+
+		updated = status == 1;
 		
 		return updated;
 	}
@@ -202,19 +186,10 @@ public class ProductDao {
 		
 		catch(Exception e)
 		{
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			logger.log(Level.WARNING, ("deleteProducts Error: " + e.getMessage()));
 		}
-		
-		if(status == 1)
-		{
-			deleted = true;
-		}
-		
-		else
-		{
-			deleted = false;
-		}
+
+		deleted = status == 1;
 		
 		return deleted;
 	}
@@ -244,7 +219,7 @@ public class ProductDao {
 
 	    catch (Exception e)
 	    {
-	        e.printStackTrace();
+			logger.log(Level.WARNING, ("getSingleProduct Error: " + e.getMessage()));
 	    }
 
 	    return row;
@@ -272,8 +247,7 @@ public class ProductDao {
 
 			}
 		}catch (Exception e ) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			logger.log(Level.WARNING, ("getProductByName Error: " + e.getMessage()));
 		}
 
 		return row;

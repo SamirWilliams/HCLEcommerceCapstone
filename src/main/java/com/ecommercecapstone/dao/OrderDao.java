@@ -10,10 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class OrderDao {
 
 	private Connection connection;
+
+	Logger logger = Logger.getLogger(OrderDao.class.getName());
 
 	private static final String INSERT_INTO_ORDERS = "INSERT INTO orders (userId) VALUES (?);";
 	private static final String SELECT_PREVIOUS_ORDER_ID = "SELECT orderId FROM orders ORDER BY orderId DESC LIMIT 0,1;";
@@ -54,8 +58,7 @@ public class OrderDao {
 			}
 
 		} catch (Exception e) {
-			System.out.println("listUsersOrders Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, ("listUserOrders Error: " + e.getMessage()));
 		}
 		return orderList;
 	}
@@ -72,8 +75,7 @@ public class OrderDao {
 
 			result = preparedStatement.executeUpdate() > 0;
 		}catch (Exception e){
-			System.out.println("cancelOrder Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,("cancelOrder Error: " + e.getMessage()));
 		}
 		return result;
 	}
@@ -127,8 +129,7 @@ public class OrderDao {
 				finalResult = true;
 			}
 		} catch (Exception e) {
-			System.out.println("insertOrder Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,("insertOrder Error: " + e.getMessage()));
 		}
 		return finalResult;
 	}
@@ -175,8 +176,7 @@ public class OrderDao {
 				finalResult = true;
 			}
 		} catch (Exception e) {
-			System.out.println("insertOrder Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,("insertOrder Error: " + e.getMessage()));
 		}
 		return finalResult;
 	}
