@@ -31,10 +31,6 @@
 <%@ include file="includes/navbar.jsp" %>
 <%@ include file="includes/cat-navbar.jsp" %>
 <div class="container">
-    <div class="card-header my-3 d-flex justify-content-between align-items-center">
-        <a href="index.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
-        <h1 class="flex-grow-1 text-center me-5">Phones</h1>
-    </div>
     <%
         if (alreadyInCart) { %>
     <h3 style='color:crimson; text-align: center'>Item Already in Cart</h3>
@@ -46,6 +42,10 @@
     } %>
     <%
         if (name.equalsIgnoreCase("phone") || name.equalsIgnoreCase("Phone") || name.equalsIgnoreCase("phones") || name.equalsIgnoreCase("Phones")) {%>
+    <div class="card-header my-3 d-flex justify-content-between align-items-center">
+        <a href="index.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
+        <h1 class="flex-grow-1 text-center me-5">Phones</h1>
+    </div>
     <div class="card-group">
         <%
             for (Product p : products) {%>
