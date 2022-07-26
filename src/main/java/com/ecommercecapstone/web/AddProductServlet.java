@@ -45,7 +45,7 @@ public class AddProductServlet extends HttpServlet {
 				response.sendRedirect("addproduct.jsp");
 			}
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "AddProductServlet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }

@@ -58,7 +58,7 @@ public class OrderDao {
 			}
 
 		} catch (Exception e) {
-			logger.log(Level.WARNING, ("listUserOrders Error: " + e.getMessage()));
+			logger.log(Level.WARNING, e.getMessage());
 		}
 		return orderList;
 	}
@@ -75,7 +75,7 @@ public class OrderDao {
 
 			result = preparedStatement.executeUpdate() > 0;
 		}catch (Exception e){
-			logger.log(Level.WARNING,("cancelOrder Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return result;
 	}
@@ -129,7 +129,7 @@ public class OrderDao {
 				finalResult = true;
 			}
 		} catch (Exception e) {
-			logger.log(Level.WARNING,("insertOrder Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return finalResult;
 	}
@@ -176,7 +176,7 @@ public class OrderDao {
 				finalResult = true;
 			}
 		} catch (Exception e) {
-			logger.log(Level.WARNING,("insertOrder Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return finalResult;
 	}

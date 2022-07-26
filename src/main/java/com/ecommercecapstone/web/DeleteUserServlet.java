@@ -43,7 +43,7 @@ public class DeleteUserServlet extends HttpServlet {
 				response.sendRedirect("list-users");
 			}
 		} catch (Exception e){
-			logger.log(Level.WARNING, "DeleteUserServlet doPost error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 
@@ -51,7 +51,7 @@ public class DeleteUserServlet extends HttpServlet {
 		try {
 			doPost(request, response);
 		} catch (Exception e){
-			logger.log(Level.WARNING, "DeleteUserServlet doGet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }

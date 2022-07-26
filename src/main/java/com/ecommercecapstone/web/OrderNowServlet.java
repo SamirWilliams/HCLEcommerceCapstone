@@ -68,7 +68,7 @@ public class OrderNowServlet extends HttpServlet {
 				response.sendRedirect("register.jsp");
 			}
 		} catch (Exception e){
-			logger.log(Level.WARNING, "OrderNowServlet doGet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 
@@ -76,7 +76,7 @@ public class OrderNowServlet extends HttpServlet {
 		try {
 			doGet(request, response);
 		} catch (Exception e){
-			logger.log(Level.WARNING, "OrderNowServlet doPost error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }

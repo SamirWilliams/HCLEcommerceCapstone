@@ -64,7 +64,7 @@ public class EditUserServlet extends HttpServlet {
 				response.sendRedirect("list-users");
 			}
 		} catch (Exception e){
-			logger.log(Level.WARNING, "EditUserServlet doPost error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 
@@ -72,7 +72,7 @@ public class EditUserServlet extends HttpServlet {
 		try {
 			doPost(request, response);
 		} catch (Exception e){
-			logger.log(Level.WARNING, "EditUserServlet doGet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 

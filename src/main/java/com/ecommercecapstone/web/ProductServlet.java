@@ -33,7 +33,7 @@ public class ProductServlet extends HttpServlet {
 
 			response.sendRedirect("product-list.jsp");
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "ProductServlet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }

@@ -22,7 +22,7 @@ public class DeleteProductServlet extends HttpServlet {
 		try {
 			doPost(request, response);
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "DeleteProductServlet doGet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 
@@ -43,7 +43,7 @@ public class DeleteProductServlet extends HttpServlet {
 			}
 			
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "DeleteProductServlet doPost error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 

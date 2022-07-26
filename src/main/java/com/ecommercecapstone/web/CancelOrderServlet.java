@@ -33,7 +33,7 @@ public class CancelOrderServlet extends HttpServlet {
 			//Will always redirect user to orders.jsp regardless of success or failure
 			response.sendRedirect("orders.jsp");
 		} catch (Exception e){
-			logger.log(Level.WARNING, "CancelOrderServlet doGet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 
 	}
@@ -42,7 +42,7 @@ public class CancelOrderServlet extends HttpServlet {
 		try {
 			doGet(request, response);
 		} catch (Exception e){
-			logger.log(Level.WARNING, "CancelOrderServlet doPost error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 
 	}

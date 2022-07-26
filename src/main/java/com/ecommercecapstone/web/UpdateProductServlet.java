@@ -22,7 +22,7 @@ public class UpdateProductServlet extends HttpServlet {
 		try {
 			doPost(request, response);
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "UpdateProductServlet doGet error: " + e.getMessage());
+			logger.log(Level.WARNING, e.getMessage());
 		}
 	}
 
@@ -50,7 +50,7 @@ public class UpdateProductServlet extends HttpServlet {
 				response.sendRedirect("updateproduct.jsp");
 			}
 		} catch (Exception e) {
-			logger.log(Level.WARNING, String.format("UpdateProductServlet doPost error: " + e.getMessage()));
+			logger.log(Level.WARNING, e.getMessage());
 		}
 	}
 

@@ -23,7 +23,7 @@ public class LogoutServlet extends HttpServlet {
 				response.sendRedirect("index.jsp");
 			}
 		} catch (Exception e){
-			logger.log(Level.WARNING, "LogoutServlet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 

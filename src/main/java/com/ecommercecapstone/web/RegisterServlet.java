@@ -23,7 +23,7 @@ public class RegisterServlet extends HttpServlet {
 		try {
 			doPost(request, response);
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "RegisterServlet doGet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 
@@ -81,7 +81,7 @@ public class RegisterServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "RegisterServlet doPost error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }

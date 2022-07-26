@@ -49,7 +49,7 @@ public class ProductDao {
 				productList.add(product);
 			}
 		} catch (Exception e) {
-			logger.log(Level.WARNING, ("getAllProducts Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return productList;
 	}
@@ -80,7 +80,7 @@ public class ProductDao {
 				}
 			}
 		} catch (Exception e) {
-			logger.log(Level.WARNING, ("getCartProducts Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return products;
 	}
@@ -104,7 +104,7 @@ public class ProductDao {
 				}
 			}
 		} catch (Exception e) {
-			logger.log(Level.WARNING, ("getTotalCartPrice Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 
 		return sum;
@@ -131,7 +131,7 @@ public class ProductDao {
 		
 		catch(Exception e)
 		{
-			logger.log(Level.WARNING, ("addProduct Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 
 		added = status == 1;
@@ -160,7 +160,7 @@ public class ProductDao {
 		
 		catch(Exception e)
 		{
-			logger.log(Level.WARNING, ("updateProduct Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 
 		updated = status == 1;
@@ -186,7 +186,7 @@ public class ProductDao {
 		
 		catch(Exception e)
 		{
-			logger.log(Level.WARNING, ("deleteProducts Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 
 		deleted = status == 1;
@@ -219,7 +219,7 @@ public class ProductDao {
 
 	    catch (Exception e)
 	    {
-			logger.log(Level.WARNING, ("getSingleProduct Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 	    }
 
 	    return row;
@@ -247,7 +247,7 @@ public class ProductDao {
 
 			}
 		}catch (Exception e ) {
-			logger.log(Level.WARNING, ("getProductByName Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 
 		return row;

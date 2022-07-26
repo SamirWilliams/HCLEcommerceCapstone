@@ -47,7 +47,7 @@ public class CheckOutServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "CheckOutServlet doGet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 
@@ -55,7 +55,7 @@ public class CheckOutServlet extends HttpServlet {
 		try {
 			doGet(request, response);
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "CheckOutServlet doPost error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }

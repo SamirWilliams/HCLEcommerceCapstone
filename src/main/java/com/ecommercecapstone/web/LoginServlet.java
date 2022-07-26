@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			response.sendRedirect("login.jsp");
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "LoginServlet doGet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 
@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "LoginServlet doPost error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }

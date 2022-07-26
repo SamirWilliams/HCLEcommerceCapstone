@@ -64,7 +64,7 @@ public class UserDao {
 			}
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, ("userLogin Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return user;
 	}
@@ -110,7 +110,7 @@ public class UserDao {
 				}
 			}
 		}catch (SQLException e) {
-			logger.log(Level.WARNING, ("outer userRegister Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 
 		return resultCode;
@@ -154,11 +154,11 @@ public class UserDao {
 						resultCode = 1;
 					}
 				} catch (SQLException e){
-					logger.log(Level.WARNING, ("inner adminUserRegister Error: " + e.getMessage()));
+					logger.log(Level.WARNING,(e.getMessage()));
 				}
 			}
 		}catch (SQLException e) {
-			logger.log(Level.WARNING, ("outer adminUserRegister Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 
 		return resultCode;
@@ -187,7 +187,7 @@ public class UserDao {
 				users.add(new User(id, firstName, lastName, phoneNumber, address, city, zipCode, country, email, isAdmin));
 			}
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, ("selectAllUsers Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return users;
 	}
@@ -203,7 +203,7 @@ public class UserDao {
 			preparedStatement.setInt(1, id);
 			rowDeleted = preparedStatement.executeUpdate() > 0;
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, ("deleteUser Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return rowDeleted;
 	}
@@ -251,12 +251,12 @@ public class UserDao {
 						resultCode = 1;
 					}
 				} catch (SQLException e) {
-					logger.log(Level.WARNING, ("inner updateUser Error: " + e.getMessage()));
+					logger.log(Level.WARNING,(e.getMessage()));
 				}
 			}
 		}
 		catch (SQLException e) {
-			logger.log(Level.WARNING, ("outer updateUser Error: " + e.getMessage()));
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return resultCode;
 	}

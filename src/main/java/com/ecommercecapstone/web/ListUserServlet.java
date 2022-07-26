@@ -25,7 +25,7 @@ public class ListUserServlet extends HttpServlet {
 		try {
 			doGet(request, response);
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "ListUserServlet doPost error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 
@@ -38,7 +38,7 @@ public class ListUserServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("users.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "ListUserServlet doGet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 

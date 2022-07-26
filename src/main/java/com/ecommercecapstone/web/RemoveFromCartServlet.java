@@ -41,7 +41,7 @@ public class RemoveFromCartServlet extends HttpServlet {
 				response.sendRedirect("cart.jsp");
 			}
 		} catch (Exception e){
-			logger.log(Level.WARNING, "RemoveFromCartServlet doPost error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }

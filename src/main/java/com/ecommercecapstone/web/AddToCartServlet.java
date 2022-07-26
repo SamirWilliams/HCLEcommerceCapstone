@@ -149,7 +149,7 @@ public class AddToCartServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "AddToCartServlet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }

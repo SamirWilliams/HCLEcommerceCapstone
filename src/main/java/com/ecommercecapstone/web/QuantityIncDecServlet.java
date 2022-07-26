@@ -61,7 +61,7 @@ public class QuantityIncDecServlet extends HttpServlet {
 				response.sendRedirect("cart.jsp");
 			}
 		}catch (Exception e) {
-			logger.log(Level.WARNING, "QuantityIncDecServlet error: " + e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }
