@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 @WebServlet("/order-now")
 public class OrderNowServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(OrderNowServlet.class.getName());
+	final Logger logger = Logger.getLogger(OrderNowServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{

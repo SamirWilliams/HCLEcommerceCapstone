@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 @WebServlet("/cart-check-out")
 public class CheckOutServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(CheckOutServlet.class.getName());
+	final Logger logger = Logger.getLogger(CheckOutServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{

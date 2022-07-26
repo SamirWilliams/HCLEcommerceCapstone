@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 @WebServlet("/add-to-cart")
 public class AddToCartServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(AddToCartServlet.class.getName());
+	final Logger logger = Logger.getLogger(AddToCartServlet.class.getName());
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

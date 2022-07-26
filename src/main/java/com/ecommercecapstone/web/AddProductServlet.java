@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 @WebServlet("/add-product")
 public class AddProductServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(AddProductServlet.class.getName());
+	final Logger logger = Logger.getLogger(AddProductServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);

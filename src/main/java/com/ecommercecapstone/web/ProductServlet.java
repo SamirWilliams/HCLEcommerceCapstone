@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 @WebServlet("/product")
 public class ProductServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(ProductServlet.class.getName());
+	final Logger logger = Logger.getLogger(ProductServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");

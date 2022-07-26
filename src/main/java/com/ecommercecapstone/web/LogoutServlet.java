@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 @WebServlet("/user-logout")
 public class LogoutServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(LogoutServlet.class.getName());
+	final Logger logger = Logger.getLogger(LogoutServlet.class.getName());
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			if (request.getSession().getAttribute("auth") != null) {

@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 @WebServlet("/update-product")
 public class UpdateProductServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(UpdateProductServlet.class.getName());
+	final Logger logger = Logger.getLogger(UpdateProductServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -50,7 +50,7 @@ public class UpdateProductServlet extends HttpServlet {
 				response.sendRedirect("updateproduct.jsp");
 			}
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "UpdateProductServlet doPost error: " + e.getMessage());
+			logger.log(Level.WARNING, String.format("UpdateProductServlet doPost error: " + e.getMessage()));
 		}
 	}
 

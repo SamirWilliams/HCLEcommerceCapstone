@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 @WebServlet("/delete-product")
 public class DeleteProductServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(DeleteProductServlet.class.getName());
+	final Logger logger = Logger.getLogger(DeleteProductServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {

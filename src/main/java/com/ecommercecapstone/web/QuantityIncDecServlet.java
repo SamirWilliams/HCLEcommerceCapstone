@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 @WebServlet ("/quantity-inc-dec")
 public class QuantityIncDecServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(QuantityIncDecServlet.class.getName());
+	final Logger logger = Logger.getLogger(QuantityIncDecServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");

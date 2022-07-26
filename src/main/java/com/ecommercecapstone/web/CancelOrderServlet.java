@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 @WebServlet("/cancel-order")
 public class CancelOrderServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(CancelOrderServlet.class.getName());
+	final Logger logger = Logger.getLogger(CancelOrderServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {

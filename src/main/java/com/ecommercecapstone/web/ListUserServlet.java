@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 @WebServlet("/list-users")
 public class ListUserServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(ListUserServlet.class.getName());
+	final Logger logger = Logger.getLogger(ListUserServlet.class.getName());
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {

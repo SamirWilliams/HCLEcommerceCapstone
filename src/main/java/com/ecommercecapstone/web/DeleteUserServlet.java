@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 @WebServlet("/delete-user")
 public class DeleteUserServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(DeleteProductServlet.class.getName());
+	final Logger logger = Logger.getLogger(DeleteProductServlet.class.getName());
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 @WebServlet("/user-login")
 public class LoginServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(LoginServlet.class.getName());
+	final Logger logger = Logger.getLogger(LoginServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {

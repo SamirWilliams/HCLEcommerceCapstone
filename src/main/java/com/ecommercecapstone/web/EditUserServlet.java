@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 @WebServlet("/edit-user")
 public class EditUserServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(EditUserServlet.class.getName());
+	final Logger logger = Logger.getLogger(EditUserServlet.class.getName());
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int resultCode;

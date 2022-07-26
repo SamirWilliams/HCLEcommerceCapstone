@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 @WebServlet("/remove-from-cart")
 public class RemoveFromCartServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(RemoveFromCartServlet.class.getName());
+	final Logger logger = Logger.getLogger(RemoveFromCartServlet.class.getName());
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
