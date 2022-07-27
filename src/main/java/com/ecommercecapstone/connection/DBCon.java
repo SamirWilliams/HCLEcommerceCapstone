@@ -1,7 +1,5 @@
 package com.ecommercecapstone.connection;
 
-import com.ecommercecapstone.web.AddProductServlet;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.logging.Level;
