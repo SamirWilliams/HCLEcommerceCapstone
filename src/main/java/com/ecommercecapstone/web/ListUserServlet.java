@@ -21,6 +21,7 @@ public class ListUserServlet extends HttpServlet {
 
 	final Logger logger = Logger.getLogger(ListUserServlet.class.getName());
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			doGet(request, response);
