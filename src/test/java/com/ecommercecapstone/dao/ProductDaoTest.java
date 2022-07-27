@@ -26,11 +26,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
 
 class ProductDaoTest
 {
+    private final Logger logger = Logger.getLogger(ProductDaoTest.class.getName());
+
     /**
      * Method under test: {@link ProductDao#ProductDao(Connection)}
      */
@@ -47,14 +51,14 @@ class ProductDaoTest
     void testGetAllProducts() throws SQLException
     {
         ResultSet resultSet = mock(ResultSet.class);
-        when(resultSet.getDouble((String) any())).thenReturn(10.0d);
-        when(resultSet.getInt((String) any())).thenReturn(1);
-        when(resultSet.getString((String) any())).thenReturn("String");
+        when(resultSet.getDouble(any())).thenReturn(10.0d);
+        when(resultSet.getInt(any())).thenReturn(1);
+        when(resultSet.getString(any())).thenReturn("String");
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
         Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         List<Product> actualAllProducts = (new ProductDao(connection)).getAllProducts();
         assertEquals(2, actualAllProducts.size());
         Product getResult = actualAllProducts.get(0);
@@ -69,12 +73,12 @@ class ProductDaoTest
         assertEquals("String", getResult.getProductImage());
         assertEquals(1, getResult.getProductId());
         assertEquals("String", getResult.getCategory());
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement(any());
         verify(preparedStatement).executeQuery();
         verify(resultSet, atLeast(1)).next();
-        verify(resultSet, atLeast(1)).getDouble((String) any());
-        verify(resultSet, atLeast(1)).getInt((String) any());
-        verify(resultSet, atLeast(1)).getString((String) any());
+        verify(resultSet, atLeast(1)).getDouble(any());
+        verify(resultSet, atLeast(1)).getInt(any());
+        verify(resultSet, atLeast(1)).getString(any());
     }
 
     /**
@@ -92,34 +96,35 @@ class ProductDaoTest
      * Method under test: {@link ProductDao#getCartProducts(List)}
      */
     @Test
-    void testGetCartProducts4() throws SQLException
+    void testGetCartProducts4()
     {
         try
         {
             ResultSet resultSet = mock(ResultSet.class);
-            when(resultSet.getDouble((String) any())).thenReturn(10.0d);
-            when(resultSet.getInt((String) any())).thenReturn(1);
-            when(resultSet.getString((String) any())).thenReturn("String");
+            when(resultSet.getDouble(any())).thenReturn(10.0d);
+            when(resultSet.getInt(any())).thenReturn(1);
+            when(resultSet.getString(any())).thenReturn("String");
             when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
             PreparedStatement preparedStatement = mock(PreparedStatement.class);
             when(preparedStatement.executeQuery()).thenReturn(resultSet);
             doNothing().when(preparedStatement).setInt(anyInt(), anyInt());
-            Connection connection = mock(Connection.class);
-            when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+            Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+            when(connection.prepareStatement(any())).thenReturn(preparedStatement);
             ProductDao productDao = new ProductDao(connection);
 
             ArrayList<Cart> cartList = new ArrayList<>();
             cartList.add(new Cart(1));
             assertEquals(2, productDao.getCartProducts(cartList).size());
-            verify(connection).prepareStatement((String) any());
+            verify(connection).prepareStatement(any());
             verify(preparedStatement).executeQuery();
             verify(preparedStatement).setInt(anyInt(), anyInt());
             verify(resultSet, atLeast(1)).next();
-            verify(resultSet, atLeast(1)).getDouble((String) any());
-            verify(resultSet, atLeast(1)).getInt((String) any());
-            verify(resultSet, atLeast(1)).getString((String) any());
-        } catch (SQLException ignored)
+            verify(resultSet, atLeast(1)).getDouble(any());
+            verify(resultSet, atLeast(1)).getInt(any());
+            verify(resultSet, atLeast(1)).getString(any());
+        } catch (SQLException e)
         {
+            logger.log(Level.WARNING,(e.getMessage()));
         }
     }
 
@@ -130,7 +135,7 @@ class ProductDaoTest
     void testGetTotalCartPrice()
     {
 
-        ProductDao productDao = new ProductDao(mock(Connection.class));
+        ProductDao productDao = new ProductDao(mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass()));
         assertEquals(0.0d, productDao.getTotalCartPrice(new ArrayList<>()));
     }
 
@@ -139,29 +144,30 @@ class ProductDaoTest
      * Method under test: {@link ProductDao#getTotalCartPrice(ArrayList)}
      */
     @Test
-    void testGetTotalCartPrice4() throws SQLException
+    void testGetTotalCartPrice4()
     {
         try{
         ResultSet resultSet = mock(ResultSet.class);
-        when(resultSet.getDouble((String) any())).thenReturn(10.0d);
+        when(resultSet.getDouble(any())).thenReturn(10.0d);
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
         doNothing().when(preparedStatement).setInt(anyInt(), anyInt());
         Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         ProductDao productDao = new ProductDao(connection);
 
         ArrayList<Cart> cartList = new ArrayList<>();
         cartList.add(new Cart(1));
         assertEquals(20.0d, productDao.getTotalCartPrice(cartList));
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement(any());
         verify(preparedStatement).executeQuery();
         verify(preparedStatement).setInt(anyInt(), anyInt());
         verify(resultSet, atLeast(1)).next();
-        verify(resultSet, atLeast(1)).getDouble((String) any());
-        } catch (SQLException ignored)
+        verify(resultSet, atLeast(1)).getDouble(any());
+        } catch (SQLException e)
         {
+            logger.log(Level.WARNING,(e.getMessage()));
         }
     }
 
@@ -174,8 +180,9 @@ class ProductDaoTest
         try{
         assertFalse((new ProductDao(null)).addProduct("Name", "Image", 10.0d, "Category"));
         assertFalse((new ProductDao(new LoadBalancedMySQLConnection(null))).addProduct("Name", "Image", 10.0d, "Category"));
-        } catch (NullPointerException ignored)
+        } catch (NullPointerException e)
         {
+            logger.log(Level.WARNING,(e.getMessage()));
         }
     }
 
@@ -190,8 +197,9 @@ class ProductDaoTest
         assertFalse((new ProductDao(null)).updateProduct(1, "Name", "Image", 10.0d, "Category"));
         assertFalse(
                 (new ProductDao(new LoadBalancedMySQLConnection(null))).updateProduct(1, "Name", "Image", 10.0d, "Category"));
-        } catch (NullPointerException ignored)
+        } catch (NullPointerException e)
         {
+            logger.log(Level.WARNING,(e.getMessage()));
         }
     }
 
@@ -205,10 +213,10 @@ class ProductDaoTest
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeUpdate()).thenReturn(1);
         doNothing().when(preparedStatement).setInt(anyInt(), anyInt());
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         assertTrue((new ProductDao(connection)).deleteProduct(1));
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement(any());
         verify(preparedStatement).executeUpdate();
         verify(preparedStatement).setInt(anyInt(), anyInt());
     }
@@ -220,28 +228,28 @@ class ProductDaoTest
     void testGetSingleProduct() throws SQLException
     {
         ResultSet resultSet = mock(ResultSet.class);
-        when(resultSet.getDouble((String) any())).thenReturn(10.0d);
-        when(resultSet.getInt((String) any())).thenReturn(1);
-        when(resultSet.getString((String) any())).thenReturn("String");
+        when(resultSet.getDouble(any())).thenReturn(10.0d);
+        when(resultSet.getInt(any())).thenReturn(1);
+        when(resultSet.getString(any())).thenReturn("String");
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
         doNothing().when(preparedStatement).setInt(anyInt(), anyInt());
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         Product actualSingleProduct = (new ProductDao(connection)).getSingleProduct(1);
         assertEquals("String", actualSingleProduct.getCategory());
         assertEquals(10.0d, actualSingleProduct.getUnitPrice());
         assertEquals("String", actualSingleProduct.getProductName());
         assertEquals("String", actualSingleProduct.getProductImage());
         assertEquals(1, actualSingleProduct.getProductId());
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement(any());
         verify(preparedStatement).executeQuery();
         verify(preparedStatement).setInt(anyInt(), anyInt());
         verify(resultSet, atLeast(1)).next();
-        verify(resultSet, atLeast(1)).getDouble((String) any());
-        verify(resultSet, atLeast(1)).getInt((String) any());
-        verify(resultSet, atLeast(1)).getString((String) any());
+        verify(resultSet, atLeast(1)).getDouble(any());
+        verify(resultSet, atLeast(1)).getInt(any());
+        verify(resultSet, atLeast(1)).getString(any());
     }
 }
 
