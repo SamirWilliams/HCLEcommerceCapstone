@@ -1,7 +1,11 @@
 package com.ecommercecapstone.connection;
 
+import com.ecommercecapstone.web.AddProductServlet;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBCon {
 
@@ -11,6 +15,8 @@ public class DBCon {
 	private static String username = "swilliams";
 	private static String identification = "Sherida22";
 
+	static final Logger logger = Logger.getLogger(DBCon.class.getName());
+
 	public static Connection getConnection() {
 		if (connection == null) {
 			try {
@@ -18,9 +24,7 @@ public class DBCon {
 				//getLoginInfo();
 				connection = DriverManager.getConnection(url, username, identification);
 			} catch (Exception e) {
-				System.out.println("getConnection Error");
-
-				e.printStackTrace();
+				logger.log(Level.WARNING,(e.getMessage()));
 			}
 		}
 		return connection;
