@@ -16,7 +16,8 @@
         addedToCart = (Boolean) request.getSession().getAttribute("addedToCart");
     }
 %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <%@ include file="includes/header.jsp" %>
     <title>Home</title>
@@ -35,11 +36,11 @@
     <% request.getSession().setAttribute("addedToCart", false);
     } 
 %>
-    <div class="card-header text-center my-3"><h1><i class="fa-solid fa-fire"></i> Hot Products</h1></div>
+    <div class="card-header text-center my-3"><h1><em class="fa-solid fa-fire"></em> Hot Products</h1></div>
     <div class="row">
         <div class="col-md-4 my-2">
         <div class="card w-100 h-100 text-center" style="width: 18rem;">
-                <img class="card-img-top" src="assets/product-image/iPhone13ProMax.jpg" width = "300" height="500" alt="Card image cap">
+                <img class="card-img-top" src="assets/product-image/iPhone13ProMax.jpg" width = "300" height="500" alt="assets/product-image/Default.jpg">
                 <div class="card-body">
                 <div class= "text-danger my-1" style="font-weight: bold; font-size: 25px">SALE</div>
                     <h5 class="card-title" style="font-weight: bold">Apple - iPhone 13 Pro Max
@@ -58,7 +59,7 @@
 
         <div class="col-md-4 my-2">
         <div class="card w-100 h-100 text-center" style="width: 18rem;">
-                <img class="card-img-top" src="assets/product-image/ASUSVivoBook15.jpg" width = "300" height="500" alt="Card image cap">
+                <img class="card-img-top" src="assets/product-image/ASUSVivoBook15.jpg" width = "300" height="500" alt="assets/product-image/Default.jpg">
                 <div class="card-body">
                 <div class= "text-danger my-1" style="font-weight: bold; font-size: 25px">SALE</div>
                     <h5 class="card-title" style="font-weight: bold">ASUS VivoBook 15
@@ -77,7 +78,7 @@
         </div>
        <div class="col-md-4 my-2">
         <div class="card w-100 h-100 text-center" style="width: 18rem;">
-                <img class="card-img-top" src="assets/product-image/CyberpowerPCGamingDesktop.jpg" width = "300" height="500" alt="Card image cap">
+                <img class="card-img-top" src="assets/product-image/CyberpowerPCGamingDesktop.jpg" width = "300" height="500" alt="assets/product-image/Default.jpg">
                 <div class="card-body">
                 <div class= "text-danger my-1" style="font-weight: bold; font-size: 25px">SALE</div>
                     <h5 class="card-title" style="font-weight: bold">Cyberpower PC Gaming Desktop

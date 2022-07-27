@@ -13,14 +13,14 @@
 </style>
 <nav style="background: #772593" class="navbar navbar-expand-lg navbar-dark">
     <div class="d-flex align-items-center justify-content-between" style="width: 100%">
-        <a style="font-size: 25px" class="navbar-brand fw-bold ms-5 my-1" href="index.jsp">Ecommerce Shopping <i style="font-size: 30px" class="fas fa-dolly"></i></a>
+        <a style="font-size: 25px" class="navbar-brand fw-bold ms-5 my-1" href="index.jsp">Ecommerce Shopping <em style="font-size: 30px" class="fas fa-dolly"></em></a>
         <div class="col-md-5">
             <form style="margin-bottom: 0" role="search" method="post" action="search.jsp">
                 <div class="input-group">
                     <input style="background: #CBC3E3" type="search" name="search_bar"
                            placeholder="Search" class="form-control" required="" oninvalid="this.setCustomValidity('Please Enter Something.')" oninput="setCustomValidity('')">
                     <button class="btn bg-light" name="save" type="submit">
-                        <i class="fa fa-search"></i>
+                        <em class="fa fa-search"></em>
                     </button>
                 </div>
             </form>
@@ -32,23 +32,23 @@
         <div class="collapse navbar-collapse me-3" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a style="font-size: 18px" class="nav-link active btn" href="index.jsp"><i class="fa-solid fa-home"></i> Home</a>
+                    <a style="font-size: 18px" class="nav-link active btn" href="index.jsp"><em class="fa-solid fa-home"></em> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a style="font-size: 18px" class="nav-link active btn" href="cart.jsp"><i class="fa-solid fa-cart-shopping"></i> Shopping Cart
+                    <a style="font-size: 18px" class="nav-link active btn" href="cart.jsp"><em class="fa-solid fa-cart-shopping"></em> Shopping Cart
                         <span style="background: #2e73b8" class="badge">${cart_list.size()}</span></a>
                 </li>
                 <% if (auth != null) {%>
                 <li class="nav-item">
-                    <a style="font-size: 18px" class="nav-link active btn" href="orders.jsp"><i class="fa-solid fa-scroll"></i> Orders</a>
+                    <a style="font-size: 18px" class="nav-link active btn" href="orders.jsp"><em class="fa-solid fa-scroll"></em> Orders</a>
                 </li>
                 <% if (auth.isAdmin()){ %>
                 <li class="nav-item">
-                    <a style="font-size: 18px" class="nav-link active btn" href="list-users"><i class="fa-solid fa-users"></i> Users</a>
+                    <a style="font-size: 18px" class="nav-link active btn" href="list-users"><em class="fa-solid fa-users"></em> Users</a>
                 </li>
                 
                 <li class="nav-item dropdown active">
-      				<a style="font-size: 18px" class="nav-link dropdown-toggle btn active" type="button"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-th-list"></i> Products</a>
+      				<a style="font-size: 18px" class="nav-link dropdown-toggle btn active" type="button"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><em class="fa-solid fa-th-list"></em> Products</a>
 					<div class="dropdown-menu" style="background: #772593">
 						<a class="dropdown-item" style="color: white; font-weight: bold; font-size: 15px;" href="addproduct.jsp">Add Product</a>
 						<a class="dropdown-item" style="color: white; font-weight: bold; font-size: 15px;" href="updateproduct.jsp">Update Product</a>
@@ -57,15 +57,15 @@
    		 		</li>
                 <% } %>
                 <li class="nav-item">
-                    <a style="font-size: 18px" class="nav-link active btn" href="user-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <a style="font-size: 18px" class="nav-link active btn" href="user-logout"><em class="fa-solid fa-arrow-right-from-bracket"></em>
                         Logout</a>
                 </li>
                 <% } else { %>
                 <li class="nav-item">
-                    <a style="font-size: 18px" class="nav-link active btn" href="register.jsp"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    <a style="font-size: 18px" class="nav-link active btn" href="register.jsp"><em class="fa-solid fa-user-plus"></em> Register</a>
                 </li>
                 <li class="nav-item">
-                    <a style="font-size: 18px" class="nav-link active btn" href="login.jsp"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                    <a style="font-size: 18px" class="nav-link active btn" href="login.jsp"><em class="fa-solid fa-arrow-right-to-bracket"></em> Login</a>
                 </li>
 
                 <% } %>

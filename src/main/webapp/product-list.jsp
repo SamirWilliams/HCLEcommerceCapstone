@@ -19,8 +19,8 @@
 
     String productChoice = (String) request.getSession().getAttribute("category");
 %>
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <%@ include file="includes/header.jsp" %>
     <title><%= productChoice %>s</title>
@@ -40,7 +40,7 @@
     } 
 %>
     <div class="card-header my-3 d-flex justify-content-between align-items-center">
-        <a href="allcategories.jsp" class="col-md-1 btn btn-primary"><i class="fa-solid fa-arrow-left"> Back</i></a>
+        <a href="allcategories.jsp" class="col-md-1 btn btn-primary"><em class="fa-solid fa-arrow-left"> Back</em></a>
         <h1 class="flex-grow-1 text-center me-5"><%= productChoice %>s</h1>
     </div>
     <div class="card-group">

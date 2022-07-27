@@ -13,10 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from cart.jsp
 @WebServlet("/cart-check-out")
 public class CheckOutServlet extends HttpServlet {
+
+	final Logger logger = Logger.getLogger(CheckOutServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
@@ -42,14 +46,17 @@ public class CheckOutServlet extends HttpServlet {
 					response.sendRedirect("cart.jsp");
 				}
 			}
-		}catch (Exception e) {
-			System.out.println("CheckOutServlet Error");
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		try {
+			doGet(request, response);
+		} catch (Exception e) {
+			logger.log(Level.WARNING,(e.getMessage()));
+		}
 	}
 }

@@ -12,14 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from navbar.jsp
 @WebServlet("/list-users")
 public class ListUserServlet extends HttpServlet {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
+	final Logger logger = Logger.getLogger(ListUserServlet.class.getName());
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			doGet(request, response);
+		} catch (Exception e) {
+			logger.log(Level.WARNING,(e.getMessage()));
+		}
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,8 +39,7 @@ public class ListUserServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("users.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
-			System.out.println("ListUserServlet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 

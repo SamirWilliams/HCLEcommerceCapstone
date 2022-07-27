@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from product-list.jsp
 @WebServlet("/add-to-cart")
 public class AddToCartServlet extends HttpServlet {
+
+	final Logger logger = Logger.getLogger(AddToCartServlet.class.getName());
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -145,8 +149,7 @@ public class AddToCartServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("AddToCartServlet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }

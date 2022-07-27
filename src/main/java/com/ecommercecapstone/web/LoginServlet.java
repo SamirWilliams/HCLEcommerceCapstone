@@ -10,13 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from login.jsp
 @WebServlet("/user-login")
 public class LoginServlet extends HttpServlet {
 
+	final Logger logger = Logger.getLogger(LoginServlet.class.getName());
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.sendRedirect("login.jsp");
+		try {
+			response.sendRedirect("login.jsp");
+		} catch (Exception e) {
+			logger.log(Level.WARNING,(e.getMessage()));
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
@@ -38,8 +46,7 @@ public class LoginServlet extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-			System.out.println("LoginServlet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }

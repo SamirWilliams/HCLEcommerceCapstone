@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from cart.jsp
 @WebServlet ("/quantity-inc-dec")
 public class QuantityIncDecServlet extends HttpServlet {
+
+	final Logger logger = Logger.getLogger(QuantityIncDecServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
@@ -57,8 +61,7 @@ public class QuantityIncDecServlet extends HttpServlet {
 				response.sendRedirect("cart.jsp");
 			}
 		}catch (Exception e) {
-			System.out.println("QuantityIncDecServlet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }

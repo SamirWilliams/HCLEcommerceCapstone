@@ -18,8 +18,8 @@
 
     List<User> userList = (List<User>) request.getSession().getAttribute("userList");
 %>
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <%@ include file="includes/header.jsp" %>
     <title>Users</title>

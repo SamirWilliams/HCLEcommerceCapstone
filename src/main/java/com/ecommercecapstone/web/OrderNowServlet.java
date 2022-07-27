@@ -14,10 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from product-list.jsp and cart.jsp
 @WebServlet("/order-now")
 public class OrderNowServlet extends HttpServlet {
+
+	final Logger logger = Logger.getLogger(OrderNowServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
@@ -64,12 +68,15 @@ public class OrderNowServlet extends HttpServlet {
 				response.sendRedirect("register.jsp");
 			}
 		} catch (Exception e){
-			System.out.println("OrderNowServlet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		try {
+			doGet(request, response);
+		} catch (Exception e){
+			logger.log(Level.WARNING,(e.getMessage()));
+		}
 	}
 }

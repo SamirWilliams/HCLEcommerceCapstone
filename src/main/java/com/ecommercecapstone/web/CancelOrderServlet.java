@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from orders.jsp
 @WebServlet("/cancel-order")
 public class CancelOrderServlet extends HttpServlet {
+
+	final Logger logger = Logger.getLogger(CancelOrderServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -29,13 +33,17 @@ public class CancelOrderServlet extends HttpServlet {
 			//Will always redirect user to orders.jsp regardless of success or failure
 			response.sendRedirect("orders.jsp");
 		} catch (Exception e){
-			System.out.println("CancelOrderServlet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		try {
+			doGet(request, response);
+		} catch (Exception e){
+			logger.log(Level.WARNING,(e.getMessage()));
+		}
+
 	}
 }

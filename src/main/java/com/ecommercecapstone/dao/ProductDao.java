@@ -8,11 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProductDao {
 
 	private Connection connection;
 
+	Logger logger = Logger.getLogger(ProductDao.class.getName());
 	private static final String SELECT_ALL_PRODUCTS = "SELECT * FROM products;";
 	private static final String SELECT_PRODUCT_BY_ID = "SELECT * FROM products WHERE productId = ?;";
 	private static final String SELECT_PRODUCT_BY_PRICE = "SELECT unitPrice FROM products WHERE productId = ?;";
@@ -31,7 +34,7 @@ public class ProductDao {
 	 */
 	public List<Product> getAllProducts() {
 		List<Product> productList = new ArrayList<>();
-		try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_ALL_PRODUCTS);){
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_ALL_PRODUCTS)){
 
 
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -46,7 +49,7 @@ public class ProductDao {
 				productList.add(product);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return productList;
 	}
@@ -58,10 +61,9 @@ public class ProductDao {
 	 */
 	public List<Cart> getCartProducts(List<Cart> cartList) {
 		List<Cart> products = new ArrayList<>();
-		try {
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_ID)) {
 			if (cartList.size() > 0) {
 				for (Cart item : cartList) {
-					PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_ID);
 					preparedStatement.setInt(1, item.getProductId());
 
 					ResultSet resultSet = preparedStatement.executeQuery();
@@ -78,7 +80,7 @@ public class ProductDao {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return products;
 	}
@@ -89,10 +91,9 @@ public class ProductDao {
 	 */
 	public double getTotalCartPrice(ArrayList<Cart> cartList) {
 		double sum = 0;
-		try {
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_PRICE)) {
 			if (!cartList.isEmpty()) {
 				for (Cart item : cartList) {
-					PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_PRICE);
 					preparedStatement.setInt(1, item.getProductId());
 
 					ResultSet resultSet = preparedStatement.executeQuery();
@@ -103,8 +104,7 @@ public class ProductDao {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("getTotalCartPrice Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 
 		return sum;
@@ -118,7 +118,7 @@ public class ProductDao {
 		boolean added;
 		int status = 0;
 
-		try(PreparedStatement preparedStatement = this.connection.prepareStatement(ADD_PRODUCT);)
+		try(PreparedStatement preparedStatement = this.connection.prepareStatement(ADD_PRODUCT))
 		{
 
 			preparedStatement.setString(1, name);
@@ -131,19 +131,10 @@ public class ProductDao {
 		
 		catch(Exception e)
 		{
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
-		
-		if(status == 1)
-		{
-			added = true;
-		}
-		
-		else
-		{
-			added = false;
-		}
+
+		added = status == 1;
 		
 		return added;
 	}
@@ -156,7 +147,7 @@ public class ProductDao {
 		boolean updated;
 		int status = 0;
 		
-		try(PreparedStatement preparedStatement = this.connection.prepareStatement(UPDATE_PRODUCT);)
+		try(PreparedStatement preparedStatement = this.connection.prepareStatement(UPDATE_PRODUCT))
 		{
 			preparedStatement.setString(1, name);
 			preparedStatement.setString(2, image);
@@ -169,19 +160,10 @@ public class ProductDao {
 		
 		catch(Exception e)
 		{
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
-		
-		if(status == 1)
-		{
-			updated = true;
-		}
-		
-		else
-		{
-			updated = false;
-		}
+
+		updated = status == 1;
 		
 		return updated;
 	}
@@ -204,19 +186,10 @@ public class ProductDao {
 		
 		catch(Exception e)
 		{
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
-		
-		if(status == 1)
-		{
-			deleted = true;
-		}
-		
-		else
-		{
-			deleted = false;
-		}
+
+		deleted = status == 1;
 		
 		return deleted;
 	}
@@ -228,9 +201,8 @@ public class ProductDao {
 	{
 		 Product row = null;
 
-	     try
+	     try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_ID))
 	     {
-	    	 PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_ID);
 	    	 preparedStatement.setInt(1, id);
 	         ResultSet rs = preparedStatement.executeQuery();
 
@@ -247,7 +219,7 @@ public class ProductDao {
 
 	    catch (Exception e)
 	    {
-	        e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 	    }
 
 	    return row;
@@ -261,10 +233,7 @@ public class ProductDao {
 	public Product getProductByName(String name) {
 		Product row = null;
 
-		try {
-
-
-			PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_NAME);
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_PRODUCT_BY_NAME)) {
 			preparedStatement.setString(1, name);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -278,8 +247,7 @@ public class ProductDao {
 
 			}
 		}catch (Exception e ) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 
 		return row;

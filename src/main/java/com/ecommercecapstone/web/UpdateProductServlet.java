@@ -10,12 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet("/update-product")
 public class UpdateProductServlet extends HttpServlet {
 
+	final Logger logger = Logger.getLogger(UpdateProductServlet.class.getName());
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		try {
+			doPost(request, response);
+		} catch (Exception e) {
+			logger.log(Level.WARNING, e.getMessage());
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,6 +49,8 @@ public class UpdateProductServlet extends HttpServlet {
 				request.getSession().setAttribute("wasUpdated", true);
 				response.sendRedirect("updateproduct.jsp");
 			}
+		} catch (Exception e) {
+			logger.log(Level.WARNING, e.getMessage());
 		}
 	}
 

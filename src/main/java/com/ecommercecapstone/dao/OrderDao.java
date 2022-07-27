@@ -10,12 +10,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class OrderDao {
 
 	private Connection connection;
 
-	//TODO Change to also include order price
+	Logger logger = Logger.getLogger(OrderDao.class.getName());
+
 	private static final String INSERT_INTO_ORDERS = "INSERT INTO orders (userId) VALUES (?);";
 	private static final String SELECT_PREVIOUS_ORDER_ID = "SELECT orderId FROM orders ORDER BY orderId DESC LIMIT 0,1;";
 	private static final String INSERT_INTO_ORDER_DETAILS = "INSERT INTO order_details (orderId, productId, orderPrice, quantity) " +
@@ -34,8 +37,7 @@ public class OrderDao {
 	 */
 	public List<Order> listUserOrders (int id){
 		List<Order> orderList = new ArrayList<>();
-		try {
-			PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_ALL_ORDERS_BY_USER);
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(SELECT_ALL_ORDERS_BY_USER)) {
 			preparedStatement.setInt(1, id);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -56,8 +58,7 @@ public class OrderDao {
 			}
 
 		} catch (Exception e) {
-			System.out.println("listUsersOrders Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING, e.getMessage());
 		}
 		return orderList;
 	}
@@ -69,14 +70,12 @@ public class OrderDao {
 	 */
 	public boolean cancelOrder(int orderId) {
 		boolean result = false;
-		try{
-			PreparedStatement preparedStatement = this.connection.prepareStatement(DELETE_ORDER_BY_ID);
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(DELETE_ORDER_BY_ID)) {
 			preparedStatement.setInt(1, orderId);
 
 			result = preparedStatement.executeUpdate() > 0;
 		}catch (Exception e){
-			System.out.println("cancelOrder Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return result;
 	}
@@ -92,9 +91,8 @@ public class OrderDao {
 		boolean orderDetailsResult = false;
 		int orderId = 0;
 
-		try {
+		try (PreparedStatement insertOrder = this.connection.prepareStatement(INSERT_INTO_ORDERS)) {
 			//Inserts userId into orders table to generate new orderId
-			PreparedStatement insertOrder = this.connection.prepareStatement(INSERT_INTO_ORDERS);
 			insertOrder.setInt(1, auth.getUserId());
 
 			ordersResult = insertOrder.executeUpdate() > 0;
@@ -131,8 +129,7 @@ public class OrderDao {
 				finalResult = true;
 			}
 		} catch (Exception e) {
-			System.out.println("insertOrder Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return finalResult;
 	}
@@ -148,9 +145,8 @@ public class OrderDao {
 		boolean orderDetailsResult;
 		int orderId = 0;
 
-		try {
+		try (PreparedStatement insertOrder = this.connection.prepareStatement(INSERT_INTO_ORDERS)) {
 			//Inserts userId into orders table to generate new orderId
-			PreparedStatement insertOrder = this.connection.prepareStatement(INSERT_INTO_ORDERS);
 			insertOrder.setInt(1, order.getUserId());
 
 			ordersResult = insertOrder.executeUpdate() > 0;
@@ -180,8 +176,7 @@ public class OrderDao {
 				finalResult = true;
 			}
 		} catch (Exception e) {
-			System.out.println("insertOrder Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 		return finalResult;
 	}

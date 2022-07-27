@@ -10,13 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Called from register.jsp and admin-register.jsp
 @WebServlet("/user-register")
 public class RegisterServlet extends HttpServlet {
 
+	final Logger logger = Logger.getLogger(RegisterServlet.class.getName());
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		try {
+			doPost(request, response);
+		} catch (Exception e) {
+			logger.log(Level.WARNING,(e.getMessage()));
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -73,8 +81,7 @@ public class RegisterServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("RegisterServlet Error");
-			e.printStackTrace();
+			logger.log(Level.WARNING,(e.getMessage()));
 		}
 	}
 }
