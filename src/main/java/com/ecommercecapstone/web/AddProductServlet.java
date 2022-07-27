@@ -19,7 +19,11 @@ public class AddProductServlet extends HttpServlet {
 	final Logger logger = Logger.getLogger(AddProductServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		try {
+			doPost(request, response);
+		}catch (Exception e) {
+			logger.log(Level.WARNING,(e.getMessage()));
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

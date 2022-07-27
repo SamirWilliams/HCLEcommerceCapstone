@@ -176,9 +176,9 @@ public class ProductDao {
 		boolean deleted;
 		int status = 0;
 		
-		try
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(DELETE_PRODUCT))
 		{
-			PreparedStatement preparedStatement = this.connection.prepareStatement(DELETE_PRODUCT);
+
 			preparedStatement.setInt(1, id);
 			
 			status = preparedStatement.executeUpdate();

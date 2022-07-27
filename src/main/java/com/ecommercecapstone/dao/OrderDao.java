@@ -91,14 +91,16 @@ public class OrderDao {
 		boolean orderDetailsResult = false;
 		int orderId = 0;
 
-		try (PreparedStatement insertOrder = this.connection.prepareStatement(INSERT_INTO_ORDERS)) {
+		try (PreparedStatement insertOrder = this.connection.prepareStatement(INSERT_INTO_ORDERS);
+		     PreparedStatement recentOrderId = this.connection.prepareStatement(SELECT_PREVIOUS_ORDER_ID);
+             PreparedStatement insertOrderDetails = this.connection.prepareStatement(INSERT_INTO_ORDER_DETAILS);) {
 			//Inserts userId into orders table to generate new orderId
 			insertOrder.setInt(1, auth.getUserId());
 
 			ordersResult = insertOrder.executeUpdate() > 0;
 
-			//Retrieves the most recently generated orderId
-			PreparedStatement recentOrderId = this.connection.prepareStatement(SELECT_PREVIOUS_ORDER_ID);
+
+
 
 			ResultSet resultSet = recentOrderId.executeQuery();
 
@@ -116,7 +118,6 @@ public class OrderDao {
 					order.setQuantity(c.getQuantity());
 					order.setOrderPrice(c.getUnitPrice() * c.getQuantity());
 
-					PreparedStatement insertOrderDetails = this.connection.prepareStatement(INSERT_INTO_ORDER_DETAILS);
 					insertOrderDetails.setInt(1, orderId);
 					insertOrderDetails.setInt(2, order.getProductId());
 					insertOrderDetails.setDouble(3, order.getOrderPrice());
@@ -145,14 +146,16 @@ public class OrderDao {
 		boolean orderDetailsResult;
 		int orderId = 0;
 
-		try (PreparedStatement insertOrder = this.connection.prepareStatement(INSERT_INTO_ORDERS)) {
+		try (PreparedStatement insertOrder = this.connection.prepareStatement(INSERT_INTO_ORDERS);
+		     PreparedStatement recentOrderId = this.connection.prepareStatement(SELECT_PREVIOUS_ORDER_ID);
+			 PreparedStatement insertOrderDetails = this.connection.prepareStatement(INSERT_INTO_ORDER_DETAILS);) {
 			//Inserts userId into orders table to generate new orderId
 			insertOrder.setInt(1, order.getUserId());
 
 			ordersResult = insertOrder.executeUpdate() > 0;
 
 			//Retrieves the most recently generated orderId
-			PreparedStatement recentOrderId = this.connection.prepareStatement(SELECT_PREVIOUS_ORDER_ID);
+
 
 			ResultSet resultSet = recentOrderId.executeQuery();
 
@@ -164,7 +167,7 @@ public class OrderDao {
 				throw new SQLException("Failed to retrieve orderId from orders table");
 			} else {
 				//Adds product from order into database
-				PreparedStatement insertOrderDetails = this.connection.prepareStatement(INSERT_INTO_ORDER_DETAILS);
+
 				insertOrderDetails.setInt(1, orderId);
 				insertOrderDetails.setInt(2, order.getProductId());
 				insertOrderDetails.setDouble(3, order.getOrderPrice());
