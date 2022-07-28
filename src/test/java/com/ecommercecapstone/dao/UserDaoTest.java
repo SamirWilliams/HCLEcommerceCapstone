@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,14 +34,12 @@ import org.mockito.Mockito;
 
 class UserDaoTest
 {
-    private static Connection connection;
-    private static UserDao userDao;
 
     @BeforeAll
     static void beforeAll()
     {
-        connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
-        userDao = new UserDao(connection);
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        UserDao userDao = new UserDao(connection);
     }
 
 
@@ -51,14 +50,14 @@ class UserDaoTest
     void testUserLogin3() throws SQLException
     {
         ResultSet resultSet = mock(ResultSet.class);
-        when(resultSet.getInt((String) any())).thenReturn(1);
-        when(resultSet.getString((String) any())).thenReturn("String");
+        when(resultSet.getInt( any())).thenReturn(1);
+        when(resultSet.getString( any())).thenReturn("String");
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
-        doNothing().when(preparedStatement).setString(anyInt(), (String) any());
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        doNothing().when(preparedStatement).setString(anyInt(), any());
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         User actualUserLoginResult = (new UserDao(connection))
                 .userLogin("SELECT * FROM users WHERE email = ? and password = SHA2(?, 512);", "iloveyou");
         assertEquals("String", actualUserLoginResult.getAddress());
@@ -71,12 +70,12 @@ class UserDaoTest
         assertEquals("String", actualUserLoginResult.getEmail());
         assertEquals("String", actualUserLoginResult.getCountry());
         assertEquals("String", actualUserLoginResult.getCity());
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement(any());
         verify(preparedStatement).executeQuery();
-        verify(preparedStatement, atLeast(1)).setString(anyInt(), (String) any());
+        verify(preparedStatement, atLeast(1)).setString(anyInt(), any());
         verify(resultSet).next();
-        verify(resultSet, atLeast(1)).getInt((String) any());
-        verify(resultSet, atLeast(1)).getString((String) any());
+        verify(resultSet, atLeast(1)).getInt(any());
+        verify(resultSet, atLeast(1)).getString(any());
     }
 
     /**
@@ -86,21 +85,21 @@ class UserDaoTest
     void testUserLogin4() throws SQLException
     {
         ResultSet resultSet = mock(ResultSet.class);
-        when(resultSet.getInt((String) any())).thenThrow(new SQLException());
-        when(resultSet.getString((String) any())).thenThrow(new SQLException());
+        when(resultSet.getInt(any())).thenThrow(new SQLException());
+        when(resultSet.getString(any())).thenThrow(new SQLException());
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
-        doNothing().when(preparedStatement).setString(anyInt(), (String) any());
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        doNothing().when(preparedStatement).setString(anyInt(), any());
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         assertNull((new UserDao(connection)).userLogin("SELECT * FROM users WHERE email = ? and password = SHA2(?, 512);",
                 "iloveyou"));
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement(any());
         verify(preparedStatement).executeQuery();
-        verify(preparedStatement, atLeast(1)).setString(anyInt(), (String) any());
+        verify(preparedStatement, atLeast(1)).setString(anyInt(), any());
         verify(resultSet).next();
-        verify(resultSet).getInt((String) any());
+        verify(resultSet).getInt( any());
     }
 
 
@@ -115,16 +114,16 @@ class UserDaoTest
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeUpdate()).thenReturn(1);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
-        doNothing().when(preparedStatement).setString(anyInt(), (String) any());
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        doNothing().when(preparedStatement).setString(anyInt(), any());
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement( any())).thenReturn(preparedStatement);
         assertEquals(-1,
                 (new UserDao(connection)).userRegister(
                         "SELECT * FROM users WHERE email = ? OR password = SHA2(? , 512) OR phoneNumber = ?;", "Doe", "4105551212",
                         "jane.doe@example.org", "iloveyou", "42 Main St", "Oxford", "21654", "GB"));
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement(any());
         verify(preparedStatement).executeQuery();
-        verify(preparedStatement, atLeast(1)).setString(anyInt(), (String) any());
+        verify(preparedStatement, atLeast(1)).setString(anyInt(), any());
         verify(resultSet).next();
     }
 
@@ -139,16 +138,16 @@ class UserDaoTest
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeUpdate()).thenReturn(1);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
-        doNothing().when(preparedStatement).setString(anyInt(), (String) any());
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        doNothing().when(preparedStatement).setString(anyInt(), any());
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         assertEquals(0,
                 (new UserDao(connection)).userRegister(
                         "SELECT * FROM users WHERE email = ? OR password = SHA2(? , 512) OR phoneNumber = ?;", "Doe", "4105551212",
                         "jane.doe@example.org", "iloveyou", "42 Main St", "Oxford", "21654", "GB"));
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement( any());
         verify(preparedStatement).executeQuery();
-        verify(preparedStatement, atLeast(1)).setString(anyInt(), (String) any());
+        verify(preparedStatement, atLeast(1)).setString(anyInt(), any());
         verify(resultSet).next();
     }
 
@@ -165,16 +164,16 @@ class UserDaoTest
         when(preparedStatement.executeUpdate()).thenReturn(1);
         doNothing().when(preparedStatement).setInt(anyInt(), anyInt());
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
-        doNothing().when(preparedStatement).setString(anyInt(), (String) any());
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        doNothing().when(preparedStatement).setString(anyInt(), any());
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         assertEquals(-1,
                 (new UserDao(connection)).adminUserRegister(
                         "SELECT * FROM users WHERE email = ? OR password = SHA2(? , 512) OR phoneNumber = ?;", "Doe", "4105551212",
                         "jane.doe@example.org", "iloveyou", "42 Main St", "Oxford", "21654", "GB", 1));
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement( any());
         verify(preparedStatement).executeQuery();
-        verify(preparedStatement, atLeast(1)).setString(anyInt(), (String) any());
+        verify(preparedStatement, atLeast(1)).setString(anyInt(), any());
         verify(resultSet).next();
     }
 
@@ -190,16 +189,16 @@ class UserDaoTest
         when(preparedStatement.executeUpdate()).thenReturn(1);
         doNothing().when(preparedStatement).setInt(anyInt(), anyInt());
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
-        doNothing().when(preparedStatement).setString(anyInt(), (String) any());
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        doNothing().when(preparedStatement).setString(anyInt(), any());
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         assertEquals(0,
                 (new UserDao(connection)).adminUserRegister(
                         "SELECT * FROM users WHERE email = ? OR password = SHA2(? , 512) OR phoneNumber = ?;", "Doe", "4105551212",
                         "jane.doe@example.org", "iloveyou", "42 Main St", "Oxford", "21654", "GB", 1));
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement(any());
         verify(preparedStatement).executeQuery();
-        verify(preparedStatement, atLeast(1)).setString(anyInt(), (String) any());
+        verify(preparedStatement, atLeast(1)).setString(anyInt(),any());
         verify(resultSet).next();
     }
 
@@ -210,19 +209,19 @@ class UserDaoTest
     void testSelectAllUsers() throws SQLException
     {
         ResultSet resultSet = mock(ResultSet.class);
-        when(resultSet.getInt((String) any())).thenReturn(1);
-        when(resultSet.getString((String) any())).thenReturn("String");
+        when(resultSet.getInt(any())).thenReturn(1);
+        when(resultSet.getString(any())).thenReturn("String");
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         assertEquals(2, (new UserDao(connection)).selectAllUsers().size());
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement( any());
         verify(preparedStatement).executeQuery();
         verify(resultSet, atLeast(1)).next();
-        verify(resultSet, atLeast(1)).getInt((String) any());
-        verify(resultSet, atLeast(1)).getString((String) any());
+        verify(resultSet, atLeast(1)).getInt( any());
+        verify(resultSet, atLeast(1)).getString(any());
     }
 
     /**
@@ -232,18 +231,18 @@ class UserDaoTest
     void testSelectAllUsers2() throws SQLException
     {
         ResultSet resultSet = mock(ResultSet.class);
-        when(resultSet.getInt((String) any())).thenThrow(new SQLException());
-        when(resultSet.getString((String) any())).thenThrow(new SQLException());
+        when(resultSet.getInt( any())).thenThrow(new SQLException());
+        when(resultSet.getString(any())).thenThrow(new SQLException());
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         assertTrue((new UserDao(connection)).selectAllUsers().isEmpty());
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement(any());
         verify(preparedStatement).executeQuery();
         verify(resultSet).next();
-        verify(resultSet).getInt((String) any());
+        verify(resultSet).getInt(any());
     }
 
     /**
@@ -255,10 +254,10 @@ class UserDaoTest
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeUpdate()).thenReturn(1);
         doNothing().when(preparedStatement).setInt(anyInt(), anyInt());
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         assertTrue((new UserDao(connection)).deleteUser(1));
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement( any());
         verify(preparedStatement).executeUpdate();
         verify(preparedStatement).setInt(anyInt(), anyInt());
     }
@@ -272,10 +271,10 @@ class UserDaoTest
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeUpdate()).thenThrow(new SQLException());
         doThrow(new SQLException()).when(preparedStatement).setInt(anyInt(), anyInt());
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         assertFalse((new UserDao(connection)).deleteUser(1));
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement(any());
         verify(preparedStatement).setInt(anyInt(), anyInt());
     }
 
@@ -286,26 +285,26 @@ class UserDaoTest
     void testUpdateUser3() throws SQLException
     {
         ResultSet resultSet = mock(ResultSet.class);
-        when(resultSet.getInt((String) any())).thenReturn(1);
+        when(resultSet.getInt(any())).thenReturn(1);
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeUpdate()).thenReturn(1);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
         doNothing().when(preparedStatement).setInt(anyInt(), anyInt());
-        doNothing().when(preparedStatement).setString(anyInt(), (String) any());
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        doNothing().when(preparedStatement).setString(anyInt(), any());
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         assertEquals(1,
                 (new UserDao(connection)).updateUser(123,
                         "SELECT COUNT(*) AS total FROM users WHERE email = ? OR phoneNumber = ? AND NOT userId = ?;", "Doe",
                         "4105551212", "jane.doe@example.org", "42 Main St", "Oxford", "21654", "GB", 1));
-        verify(connection, atLeast(1)).prepareStatement((String) any());
+        verify(connection, atLeast(1)).prepareStatement(any());
         verify(preparedStatement).executeUpdate();
         verify(preparedStatement).executeQuery();
         verify(preparedStatement, atLeast(1)).setInt(anyInt(), anyInt());
-        verify(preparedStatement, atLeast(1)).setString(anyInt(), (String) any());
+        verify(preparedStatement, atLeast(1)).setString(anyInt(),any());
         verify(resultSet, atLeast(1)).next();
-        verify(resultSet, atLeast(1)).getInt((String) any());
+        verify(resultSet, atLeast(1)).getInt(any());
     }
 
     /**
@@ -315,25 +314,25 @@ class UserDaoTest
     void testUpdateUser4() throws SQLException
     {
         ResultSet resultSet = mock(ResultSet.class);
-        when(resultSet.getInt((String) any())).thenThrow(new SQLException());
+        when(resultSet.getInt(any())).thenThrow(new SQLException());
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
         PreparedStatement preparedStatement = mock(PreparedStatement.class);
         when(preparedStatement.executeUpdate()).thenReturn(1);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
         doNothing().when(preparedStatement).setInt(anyInt(), anyInt());
-        doNothing().when(preparedStatement).setString(anyInt(), (String) any());
-        Connection connection = mock(Connection.class);
-        when(connection.prepareStatement((String) any())).thenReturn(preparedStatement);
+        doNothing().when(preparedStatement).setString(anyInt(),any());
+        Connection connection = mock(com.ecommercecapstone.connection.DBCon.getConnection().getClass());
+        when(connection.prepareStatement(any())).thenReturn(preparedStatement);
         assertEquals(0,
                 (new UserDao(connection)).updateUser(123,
                         "SELECT COUNT(*) AS total FROM users WHERE email = ? OR phoneNumber = ? AND NOT userId = ?;", "Doe",
                         "4105551212", "jane.doe@example.org", "42 Main St", "Oxford", "21654", "GB", 1));
-        verify(connection).prepareStatement((String) any());
+        verify(connection).prepareStatement(any());
         verify(preparedStatement).executeQuery();
         verify(preparedStatement).setInt(anyInt(), anyInt());
-        verify(preparedStatement, atLeast(1)).setString(anyInt(), (String) any());
+        verify(preparedStatement, atLeast(1)).setString(anyInt(),any());
         verify(resultSet).next();
-        verify(resultSet).getInt((String) any());
+        verify(resultSet).getInt(any());
     }
 }
 
